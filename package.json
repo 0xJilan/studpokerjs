@@ -1,0 +1,31 @@
+{
+  "name": "studpokerjs",
+  "version": "0.0.1",
+  "description": "TS/JS Library who help to play Caribbean Poker against IA",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "/dist"
+  ],
+  "scripts": {
+    "test": "npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/0xJilan/studpokerjs.git"
+  },
+  "keywords": [
+    "poker",
+    "studpoker",
+    "carribean",
+    "poker"
+  ],
+  "author": "0xJilan",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/0xJilan/studpokerjs/issues"
+  },
+  "dependencies": {
+    "typescript": "^4.7.4"
+  }
+}
