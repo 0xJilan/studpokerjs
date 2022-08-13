@@ -8,5 +8,5 @@
  * // => 90
  */
 export const substract = (first: number, second: number): number => {
-  return first - second;
+  return second - first;
 };

@@ -8,5 +8,5 @@
  * // => 20
  */
 export const sum = (first: number, second: number): number => {
-  return first - second;
+  return first + second;
 };
