@@ -8,6 +8,7 @@
     "/dist"
   ],
   "scripts": {
+    "build": "npx tsc",
     "test": "npm test"
   },
   "repository": {
