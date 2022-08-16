@@ -14,13 +14,25 @@ const ranksOfCards: string[] = [
   "K",
   "A",
 ];
-export const createDeckOfCards = (): string[] => {
+
+export const createDeckFromCards = (): string[] => {
   let newDeck: string[] = [];
   suitsOfCards.map((suit) =>
     ranksOfCards.map((rank) => newDeck.push(rank + suit))
   );
   return newDeck;
 };
+
 export const shuffleDeck = (deck: string[]): string[] => {
   return [...deck].sort(() => 0.5 - Math.random());
+};
+
+export const distributeDeck = (
+  shuffledDeck: string[],
+  numberOfPlayer: number = 2
+): string[][] => {
+  const cardsByPlayer: number = 5;
+  return [...Array(numberOfPlayer)].map((_, i) =>
+    shuffledDeck.slice(i * cardsByPlayer, i * cardsByPlayer + cardsByPlayer)
+  );
 };
