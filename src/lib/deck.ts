@@ -1,25 +1,18 @@
-const suitsOfCards: string[] = ["H", "C", "D", "S"];
-const ranksOfCards: string[] = [
-  "2",
-  "3",
-  "4",
-  "5",
-  "6",
-  "7",
-  "8",
-  "9",
-  "10",
-  "J",
-  "Q",
-  "K",
-  "A",
-];
+const suits: string[] = ["H", "C", "D", "S"];
+const values: number[] = [...Array(13)].map((_, index) => index + 1);
+const extractFromCard = (type: string, card: string): string => {
+  return type === "suits"
+    ? card.length > 2
+      ? card[2]
+      : card[1]
+    : type === "values" && card.length > 2
+    ? card[0] + card[1]
+    : card[0];
+};
 
 export const createDeckFromCards = (): string[] => {
   let newDeck: string[] = [];
-  suitsOfCards.map((suit) =>
-    ranksOfCards.map((rank) => newDeck.push(rank + suit))
-  );
+  suits.map((suit) => values.map((value) => newDeck.push(value + suit)));
   return newDeck;
 };
 
@@ -35,4 +28,11 @@ export const distributeDeck = (
   return [...Array(numberOfPlayer)].map((_, i) =>
     shuffledDeck.slice(i * cardsByPlayer, i * cardsByPlayer + cardsByPlayer)
   );
+};
+
+export const sortBySuitsAndValues = (deck: string[]): any[][] => {
+  return [
+    deck.map((card) => extractFromCard("suits", card)).sort(),
+    deck.map((card) => extractFromCard("values", card)).sort(),
+  ];
 };
