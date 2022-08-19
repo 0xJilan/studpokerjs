@@ -75,7 +75,7 @@ describe("check if hand contains staight", () => {
   );
   const withoutFlushButStraight = isStraightFlush(
     [4, 5, 6, 7, 8],
-    ["C", "C", "H", "C", "C"]
+    ["C", "C", "C", "C", "H"]
   );
   const withoutStraightButFlush = isStraightFlush(
     [4, 5, 6, 7, 12],
@@ -83,16 +83,16 @@ describe("check if hand contains staight", () => {
   );
   const withoutStraightFlush = isStraightFlush(
     [4, 5, 6, 7, 12],
-    ["C", "C", "D", "C", "C"]
+    ["C", "C", "C", "C", "D"]
   );
 
-  const withRoyalFlush = isStraightFlush(
+  const withRoyalFlush = isRoyalFlush(
     [1, 10, 11, 12, 13],
     ["C", "C", "C", "C", "C"]
   );
-  const withoutRoyalFlush = isStraightFlush(
+  const withoutRoyalFlush = isRoyalFlush(
     [1, 10, 11, 12, 13],
-    ["C", "C", "D", "C", "C"]
+    ["C", "C", "C", "C", "D"]
   );
 
   it("it must return false if not contains straight", () => {
