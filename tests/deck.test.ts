@@ -16,19 +16,7 @@ const isSuits = (currentValue: any): boolean =>
   currentValue === "S";
 
 const isValues = (currentValue: any): boolean =>
-  currentValue == 1 ||
-  currentValue == 2 ||
-  currentValue == 3 ||
-  currentValue == 4 ||
-  currentValue == 5 ||
-  currentValue == 6 ||
-  currentValue == 7 ||
-  currentValue == 8 ||
-  currentValue == 9 ||
-  currentValue == 10 ||
-  currentValue == 11 ||
-  currentValue == 12 ||
-  currentValue == 13;
+  typeof currentValue == "number" && currentValue >= 1 && currentValue <= 13;
 
 const isSorted = (arrayOfValuesOrSuits: string[]) =>
   arrayOfValuesOrSuits

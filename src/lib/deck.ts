@@ -24,6 +24,6 @@ export const distributeDeck = (
 export const sortBySuitsAndValues = (deck: string[]): any[][] => {
   return [
     deck.map((card) => card.split("-")[1]).sort(),
-    deck.map((card) => card.split("-")[0]).sort(),
+    deck.map((card) => Number(card.split("-")[0])).sort((a, b) => a - b),
   ];
 };
