@@ -1,5 +1,6 @@
 import {
   isAceKing,
+  getDuplicates,
   isOnePair,
   isTwoPairs,
   isThreeOfKind,
@@ -10,46 +11,53 @@ import {
   isStraightFlush,
   isRoyalFlush,
 } from "./checker";
+import { HandRankings, HandPayouts, Resolution } from "./utils";
 
-enum HandRankings {
-  ACE_AND_KING = 100,
-  ONE_PAIR = 200,
-  TWO_PAIRS = 300,
-  THREE_OF_KIND = 400,
-  STRAIGHT = 500,
-  FLUSH = 600,
-  FULL = 700,
-  FOUR_OF_KIND = 800,
-  STRAIGHT_FLUSH = 900,
-  ROYAL_FLUSH = 1000,
-}
-enum HandPayouts {
-  ACE_AND_KING = 0,
-  ONE_PAIR = 1,
-  TWO_PAIRS = 2,
-  THREE_OF_KIND = 3,
-  STRAIGHT = 4,
-  FLUSH = 5,
-  FULL = 7,
-  FOUR_OF_KIND = 20,
-  STRAIGHT_FLUSH = 50,
-  ROYAL_FLUSH = 100,
-}
-interface Resolution {
-  score: number;
-  handRank: string;
-  payoutCoeff: number;
-}
-
-{
-  /**
-const handResolver = (hand: any[][]): Resolution => {
-  const [suits, values] = hand;
-  const handsToTest = [isRoyalFlush(suits, values), isStraightFlush(suits, values),  isFourOfKind(suits, values), isFull(suits, values), isFlush(suits, values), isStraight(suits, values), isThreeOfKind(suits, values),  isTwoPairs(suits, values), isOnePair(suits, values), isAceKing(suits, values)];
-  const handResult = handsToTest.find(toTest => typeof toTest === 'string' ) || 'NOTHING';   
-
-  const getRank = HandRankings[handResult];
-  return { score: 0, handRank: "test", payoutCoeff: 0 };
+export const getRanking = (suits: string[], values: number[]): string => {
+  return (
+    isRoyalFlush(suits, values) ||
+    isStraightFlush(suits, values) ||
+    isFourOfKind(values) ||
+    isFull(values) ||
+    isFlush(suits) ||
+    isStraight(values) ||
+    isThreeOfKind(values) ||
+    isTwoPairs(values) ||
+    isOnePair(values) ||
+    isAceKing(values) ||
+    "NOTHING"
+  );
 };
-*/
-}
+
+const convertAndSortAceValue = (values: number[]): number[] =>
+  [...values].map((value) => (value === 1 ? 14 : value)).sort((a, b) => a - b);
+
+const sum = (values: number[]): number =>
+  values.reduce((accumulotor, value) => accumulotor + value);
+
+export const getPoints = (rank: string, values: number[]): number => {
+  const convertedValues = convertAndSortAceValue(values);
+  const duplicates = getDuplicates(convertedValues);
+  return rank === "ONE_PAIR" ||
+    rank === "THREE_OF_KIND" ||
+    rank === "FOUR_OF_KIND"
+    ? sum(duplicates)
+    : rank === "TWO_PAIRS"
+    ? sum(duplicates.slice(2))
+    : rank === "FULL"
+    ? duplicates[2] * 3
+    : sum(convertedValues);
+};
+
+export const resolveHand = (hand: any[][]): Resolution => {
+  const [suits, values] = hand;
+  const ranking: string | any = getRanking(suits, values);
+  const rank: number | any = HandRankings[ranking];
+  const points: number = getPoints(ranking, values);
+  const coeff: number | any = HandPayouts[ranking];
+  return {
+    score: rank + points,
+    handRank: ranking,
+    payout: coeff,
+  };
+};
