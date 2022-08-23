@@ -1,10 +1,10 @@
 import { HandName } from "./utils";
 
 /**
- * Check if sorted array contains Ace/King combination
+ * Check if sorted array contains Ace(14) & King(13) combination
  * @param {number []} values Array of card values
  * @returns {HandName} 'COMBINATION_NAME'|| false
- * @exemple isAceKing([*,*,*,13,14]) => "ACE_AND_KING"
+ * @exemple isAceKing([4,7,9,13,14]) => "ACE_AND_KING"
  */
 export const isAceKing = (values: number[]): HandName =>
   values.includes(14) && values.includes(13) && "ACE_AND_KING";
@@ -83,7 +83,7 @@ export const sum = (values: number[]): number =>
   values.reduce((accumulotor, value) => accumulotor + value);
 
 /**
- * Check if sorted array contains a straight with As as One
+ * Check if sorted array contains a straight with As(14) as One
  * @param {number []} values Array of card values
  * @returns {boolean} true || false
  * @exemple
