@@ -1,5 +1,5 @@
 import { Deck } from "./utils";
-
+//TODO: Check how Add doc for other thing that function (constante, interface, type, etc...)
 const suits: string[] = ["H", "C", "D", "S"];
 const values: number[] = [...Array(13)].map((_, index) => index + 2); //2 to 14
 
