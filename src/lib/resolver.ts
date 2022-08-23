@@ -15,16 +15,17 @@ import {
 import { HandRankings, HandPayouts, Resolution, HandName, Deck } from "./utils";
 
 export const getRanking = (suits: string[], values: number[]): HandName => {
+  const duplicates: number[] = getDuplicates(values);
   return (
     isRoyalFlush(suits, values) ||
     isStraightFlush(suits, values) ||
-    isFourOfKind(values) ||
-    isFull(values) ||
+    isFourOfKind(duplicates) ||
+    isFull(duplicates) ||
     isFlush(suits) ||
     isStraight(values) ||
-    isThreeOfKind(values) ||
-    isTwoPairs(values) ||
-    isOnePair(values) ||
+    isThreeOfKind(duplicates) ||
+    isTwoPairs(duplicates) ||
+    isOnePair(duplicates) ||
     isAceKing(values) ||
     "NOTHING"
   );
