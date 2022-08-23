@@ -1,13 +1,14 @@
-import { getRanking, getPoints } from "../src/lib/resolver";
-
+import { getRanking, getPoints, resolveHand } from "../src/lib/resolver";
+import { Resolution } from "../src/lib/utils";
+//TODO: HANDLE MOKING OF TEST
 const valuesOf = {
   Nothing: [3, 5, 7, 11, 12],
-  AceAndKing: [1, 10, 13, 5, 7],
-  OnePair: [1, 3, 3, 8, 11],
-  TwoPairs: [1, 3, 3, 8, 8],
+  AceAndKing: [5, 7, 10, 13, 14],
+  OnePair: [3, 3, 8, 11, 14],
+  TwoPairs: [3, 3, 8, 8, 14],
   ThreeOfKind: [2, 2, 2, 10, 12],
   RegularStraight: [4, 5, 6, 7, 8],
-  HighStraight: [1, 10, 11, 12, 13],
+  HighStraight: [10, 11, 12, 13, 14],
   Full: [5, 5, 5, 7, 7],
   FourOfKind: [3, 3, 3, 3, 7],
 };
@@ -71,7 +72,7 @@ describe("Calculates the value of the hand", () => {
   const NOTHING = getPoints("NOTHING", valuesOf.Nothing);
   const ONE_PAIR = getPoints("ONE_PAIR", valuesOf.OnePair);
   const TWO_PAIRS = getPoints("TWO_PAIRS", valuesOf.TwoPairs);
-  const THREE_OF_KINDS = getPoints("THREE_OF_KINDS", valuesOf.ThreeOfKind);
+  const THREE_OF_KIND = getPoints("THREE_OF_KIND", valuesOf.ThreeOfKind);
   const FULL = getPoints("FULL", valuesOf.Full);
   const FOUR_OF_KIND = getPoints("FOUR_OF_KIND", valuesOf.FourOfKind);
   it("must add up all the values of the hand", () => {
@@ -84,12 +85,52 @@ describe("Calculates the value of the hand", () => {
     expect(TWO_PAIRS).toEqual(16);
   });
   it("must add up the value of each of the cards that make up the Three Of Kind", () => {
-    expect(THREE_OF_KINDS).toEqual(6);
+    expect(THREE_OF_KIND).toEqual(6);
   });
   it("must add up the value of each of the cards that make up the Four Of Kind", () => {
     expect(FOUR_OF_KIND).toEqual(12);
   });
   it("must add up the value of each of the cards that make up the Three Of Kind who compose the full", () => {
     expect(FULL).toEqual(15);
+  });
+});
+
+describe("Resolve hand with rank and points", () => {
+  const TWOPAIRS = resolveHand({
+    suits: ["C", "C", "D", "H", "S"],
+    values: [3, 3, 8, 8, 14],
+  });
+  const STRAIGHT = resolveHand({
+    suits: ["C", "C", "D", "D", "D"],
+    values: [4, 5, 6, 7, 8],
+  });
+  const ROYALFLUSH = resolveHand({
+    suits: ["C", "C", "C", "C", "C"],
+    values: [10, 11, 12, 13, 14],
+  });
+
+  it("must return an object", () => {
+    expect(typeof TWOPAIRS).toBe("object");
+  });
+  it("must output this result for a given Hand of TWO PAIRS", () => {
+    expect(TWOPAIRS).toMatchObject<Resolution>({
+      score: 316,
+      handRank: "TWO_PAIRS",
+      payout: 2,
+    });
+  });
+  it("must output this result for a given Hand of STRAIGHT", () => {
+    expect(STRAIGHT).toMatchObject<Resolution>({
+      score: 530,
+      handRank: "STRAIGHT",
+      payout: 4,
+    });
+  });
+  it("must output this result for a given Hand of ROYAL FLUSh", () => {
+    expect(ROYALFLUSH).toMatchObject<Resolution>({
+      score: 1060,
+      handRank: "ROYAL_FLUSH",
+      payout: 100,
+    });
   });
 });

@@ -14,8 +14,8 @@ import {
 describe("check if hand contains Ace & King", () => {
   const withoutAceAndKing = isAceKing([2, 10, 12, 5, 7]);
   const withOnlyKing = isAceKing([2, 10, 13, 5, 7]);
-  const withOnlyAce = isAceKing([1, 10, 12, 5, 7]);
-  const withAceAndKing = isAceKing([1, 10, 13, 5, 7]);
+  const withOnlyAce = isAceKing([14, 10, 12, 5, 7]);
+  const withAceAndKing = isAceKing([14, 10, 13, 5, 7]);
   it("must be false if not contains Ace & King", () => {
     expect(withoutAceAndKing).toBe(false);
   });
@@ -31,8 +31,8 @@ describe("check if hand contains Ace & King", () => {
 });
 
 describe("check if hand contains duplicates values", () => {
-  const withOnePair = isOnePair([1, 3, 3, 8, 11]);
-  const withTwoPairs = isTwoPairs([1, 3, 3, 8, 8]);
+  const withOnePair = isOnePair([3, 3, 8, 11, 14]);
+  const withTwoPairs = isTwoPairs([3, 3, 8, 8, 14]);
   const withThreeOfKind = isThreeOfKind([2, 2, 2, 10, 12]);
   const withFourOfKind = isFourOfKind([3, 3, 3, 3, 7]);
   const withFull = isFull([5, 5, 5, 7, 7]);
@@ -66,9 +66,9 @@ describe("check if hand contains flush", () => {
 });
 
 describe("check if hand contains staight", () => {
-  const withoutStraight = isStraight([1, 10, 4, 5, 9]);
-  const withHighStraight = isStraight([1, 10, 11, 12, 13]);
-  const withLowStraight = isStraight([1, 2, 3, 4, 5]);
+  const withoutStraight = isStraight([4, 5, 9, 10, 14]);
+  const withHighStraight = isStraight([10, 11, 12, 13, 14]);
+  const withLowStraight = isStraight([2, 3, 4, 5, 14]);
   const withRegularStraight = isStraight([4, 5, 6, 7, 8]);
   const withStraightFlush = isStraightFlush(
     ["C", "C", "C", "C", "C"],
@@ -89,11 +89,11 @@ describe("check if hand contains staight", () => {
 
   const withRoyalFlush = isRoyalFlush(
     ["C", "C", "C", "C", "C"],
-    [1, 10, 11, 12, 13]
+    [10, 11, 12, 13, 14]
   );
   const withoutRoyalFlush = isRoyalFlush(
     ["C", "C", "C", "C", "D"],
-    [1, 10, 11, 12, 13]
+    [10, 11, 12, 13, 14]
   );
 
   it("it must return false if not contains straight", () => {

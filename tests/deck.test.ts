@@ -2,7 +2,7 @@ import {
   createDeckFromCards,
   shuffleDeck,
   distributeDeck,
-  sortBySuitsAndValues,
+  splitBySuitsAndValues,
 } from "../src/lib/deck";
 
 const deck = createDeckFromCards();
@@ -16,12 +16,7 @@ const isSuits = (currentValue: any): boolean =>
   currentValue === "S";
 
 const isValues = (currentValue: any): boolean =>
-  typeof currentValue == "number" && currentValue >= 1 && currentValue <= 13;
-
-const isSorted = (arrayOfValuesOrSuits: string[]) =>
-  arrayOfValuesOrSuits
-    .slice(1)
-    .every((item, i) => arrayOfValuesOrSuits[i] <= item);
+  typeof currentValue == "number" && currentValue >= 2 && currentValue <= 14;
 
 describe("Generates a new deck of cards", () => {
   it("contains 52 cards", () => {
@@ -63,21 +58,15 @@ describe("Distribute cards", () => {
   });
 });
 describe("Split deck by values and suits", () => {
-  const splittedDeck = sortBySuitsAndValues(setOfCards[0]);
-  const [bySuits, byValues] = splittedDeck;
+  const splittedDeck = splitBySuitsAndValues(setOfCards[0]);
+  const { suits, values } = splittedDeck;
   it("must return two arrays", () => {
-    expect(splittedDeck.length).toBe(2);
+    expect(Object.keys(splittedDeck).length).toBe(2);
   });
   it("first array must contain suits", () => {
-    expect(bySuits.every(isSuits)).toBe(true);
+    expect(suits.every(isSuits)).toBe(true);
   });
   it("second array must contain values", () => {
-    expect(byValues.every(isValues)).toBe(true);
-  });
-  it("must be sorted by suits", () => {
-    expect(isSorted(bySuits)).toBe(true);
-  });
-  it("must be sorted by values", () => {
-    expect(isSorted(byValues)).toBe(true);
+    expect(values.every(isValues)).toBe(true);
   });
 });

@@ -1,5 +1,7 @@
-export const isAceKing = (values: number[]): string =>
-  values.includes(1) && values.includes(13) && "ACE_AND_KING";
+import { HandNameOrFalse } from "./utils";
+
+export const isAceKing = (values: number[]): HandNameOrFalse =>
+  values.includes(14) && values.includes(13) && "ACE_AND_KING";
 
 export const getDuplicates = (values: number[]): number[] => {
   return values.filter(
@@ -7,41 +9,49 @@ export const getDuplicates = (values: number[]): number[] => {
       array.lastIndexOf(value) != index || array.indexOf(value) != index
   );
 };
-export const isOnePair = (values: number[]): string =>
+export const isOnePair = (values: number[]): HandNameOrFalse =>
   getDuplicates(values).length === 2 && "ONE_PAIR";
 
-export const isTwoPairs = (values: number[]): string =>
+export const isTwoPairs = (values: number[]): HandNameOrFalse =>
   getDuplicates(values).length === 4 &&
   getDuplicates(values)[0] !== getDuplicates(values)[3] &&
   "TWO_PAIRS";
 
-export const isThreeOfKind = (values: number[]): string =>
+export const isThreeOfKind = (values: number[]): HandNameOrFalse =>
   getDuplicates(values).length === 3 && "THREE_OF_KIND";
 
-export const isFull = (values: number[]): string =>
+export const isFull = (values: number[]): HandNameOrFalse =>
   getDuplicates(values).length === 5 && "FULL";
 
-export const isFourOfKind = (values: number[]): string =>
+export const isFourOfKind = (values: number[]): HandNameOrFalse =>
   getDuplicates(values).length === 4 &&
   getDuplicates(values)[0] === getDuplicates(values)[3] &&
   "FOUR_OF_KIND";
 
-const isHighStraight = (values: number[]): boolean =>
-  [1, 10, 11, 12, 13].every((val, index) => val === values[index]);
+export const sum = (values: number[]): number =>
+  values.reduce((accumulotor, value) => accumulotor + value);
 
-const isRegularStraight = (values: number[]): boolean =>
+const isLowStraight = (values: number[]): HandNameOrFalse =>
+  [2, 3, 4, 5, 14].every((val, index) => val === values[index]);
+
+const isRegularStraight = (values: number[]): HandNameOrFalse =>
   values.every((value, index, array) =>
     index < 4 ? value == array[index + 1] - 1 : value == array[index]
   );
 
-export const isStraight = (values: number[]): string =>
-  (isHighStraight(values) || isRegularStraight(values)) && "STRAIGHT";
+export const isStraight = (values: number[]): HandNameOrFalse =>
+  (isLowStraight(values) || isRegularStraight(values)) && "STRAIGHT";
 
-export const isFlush = (suits: string[]): string =>
+export const isFlush = (suits: string[]): HandNameOrFalse =>
   suits[0] === suits[4] && "FLUSH";
 
-export const isStraightFlush = (suits: string[], values: number[]): string =>
+export const isStraightFlush = (
+  suits: string[],
+  values: number[]
+): HandNameOrFalse =>
   isFlush(suits) && isRegularStraight(values) && "STRAIGHT_FLUSH";
 
-export const isRoyalFlush = (suits: string[], values: number[]): string =>
-  isFlush(suits) && isHighStraight(values) && "ROYAL_FLUSH";
+export const isRoyalFlush = (
+  suits: string[],
+  values: number[]
+): HandNameOrFalse => isFlush(suits) && sum(values) === 60 && "ROYAL_FLUSH";

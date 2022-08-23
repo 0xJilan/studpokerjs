@@ -10,10 +10,20 @@ import {
   isFourOfKind,
   isStraightFlush,
   isRoyalFlush,
+  sum,
 } from "./checker";
-import { HandRankings, HandPayouts, Resolution } from "./utils";
+import {
+  HandRankings,
+  HandPayouts,
+  Resolution,
+  HandNameOrFalse,
+  Deck,
+} from "./utils";
 
-export const getRanking = (suits: string[], values: number[]): string => {
+export const getRanking = (
+  suits: string[],
+  values: number[]
+): HandNameOrFalse => {
   return (
     isRoyalFlush(suits, values) ||
     isStraightFlush(suits, values) ||
@@ -29,15 +39,14 @@ export const getRanking = (suits: string[], values: number[]): string => {
   );
 };
 
-const convertAndSortAceValue = (values: number[]): number[] =>
-  [...values].map((value) => (value === 1 ? 14 : value)).sort((a, b) => a - b);
+const isOnlyContainNumbers = (array: any[]) =>
+  array.every((value) => typeof value === "number");
 
-const sum = (values: number[]): number =>
-  values.reduce((accumulotor, value) => accumulotor + value);
+const sortByType = (array: any[]) =>
+  isOnlyContainNumbers(array) ? array.sort((a, b) => a - b) : array.sort();
 
 export const getPoints = (rank: string, values: number[]): number => {
-  const convertedValues = convertAndSortAceValue(values);
-  const duplicates = getDuplicates(convertedValues);
+  const duplicates = getDuplicates(values);
   return rank === "ONE_PAIR" ||
     rank === "THREE_OF_KIND" ||
     rank === "FOUR_OF_KIND"
@@ -46,18 +55,18 @@ export const getPoints = (rank: string, values: number[]): number => {
     ? sum(duplicates.slice(2))
     : rank === "FULL"
     ? duplicates[2] * 3
-    : sum(convertedValues);
+    : sum(values);
 };
 
-export const resolveHand = (hand: any[][]): Resolution => {
-  const [suits, values] = hand;
-  const ranking: string | any = getRanking(suits, values);
-  const rank: number | any = HandRankings[ranking];
-  const points: number = getPoints(ranking, values);
-  const coeff: number | any = HandPayouts[ranking];
+export const resolveHand = (hand: Deck): Resolution => {
+  const { suits, values } = hand;
+  const sortedSuits = sortByType(suits);
+  const sortedValues = sortByType(values);
+  const ranking: string | any = getRanking(sortedSuits, sortedValues);
   return {
-    score: rank + points,
+    score: HandRankings[ranking] + getPoints(ranking, sortedValues),
     handRank: ranking,
-    payout: coeff,
+    payout: HandPayouts[ranking],
   };
 };
+//TODO: ADD A FUNCTION WHO COMPARE TWO HANDS AND RETURN WINNER

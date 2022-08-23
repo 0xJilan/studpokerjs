@@ -25,7 +25,12 @@ export enum HandPayouts {
   ROYAL_FLUSH = 100,
 }
 export interface Resolution {
-  score: number;
+  score: number | any;
   handRank: string;
-  payout: number;
+  payout: number | any;
 }
+export interface Deck {
+  suits: string[];
+  values: number[];
+}
+export type HandNameOrFalse = string | boolean;

@@ -1,5 +1,7 @@
+import { Deck } from "./utils";
+
 const suits: string[] = ["H", "C", "D", "S"];
-const values: number[] = [...Array(13)].map((_, index) => index + 1);
+const values: number[] = [...Array(13)].map((_, index) => index + 2); //2 to 14
 
 export const createDeckFromCards = (): string[] => {
   let newDeck: string[] = [];
@@ -21,9 +23,9 @@ export const distributeDeck = (
   );
 };
 
-export const sortBySuitsAndValues = (deck: string[]): any[][] => {
-  return [
-    deck.map((card) => card.split("-")[1]).sort(),
-    deck.map((card) => Number(card.split("-")[0])).sort((a, b) => a - b),
-  ];
+export const splitBySuitsAndValues = (deck: string[]): Deck => {
+  return {
+    suits: deck.map((card) => card.split("-")[1]),
+    values: deck.map((card) => Number(card.split("-")[0])),
+  };
 };
