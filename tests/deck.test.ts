@@ -4,19 +4,11 @@ import {
   distributeDeck,
   splitBySuitsAndValues,
 } from "../src/lib/deck";
+import { isSuits, isValues } from "../src/lib/mocks";
 
 const deck = createDeckFromCards();
 const deckShuffled = shuffleDeck(deck);
 const setOfCards = distributeDeck(deckShuffled);
-
-const isSuits = (currentValue: any): boolean =>
-  currentValue === "H" ||
-  currentValue === "D" ||
-  currentValue === "C" ||
-  currentValue === "S";
-
-const isValues = (currentValue: any): boolean =>
-  typeof currentValue == "number" && currentValue >= 2 && currentValue <= 14;
 
 describe("Generates a new deck of cards", () => {
   it("contains 52 cards", () => {

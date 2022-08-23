@@ -12,18 +12,9 @@ import {
   isRoyalFlush,
   sum,
 } from "./checker";
-import {
-  HandRankings,
-  HandPayouts,
-  Resolution,
-  HandNameOrFalse,
-  Deck,
-} from "./utils";
+import { HandRankings, HandPayouts, Resolution, HandName, Deck } from "./utils";
 
-export const getRanking = (
-  suits: string[],
-  values: number[]
-): HandNameOrFalse => {
+export const getRanking = (suits: string[], values: number[]): HandName => {
   return (
     isRoyalFlush(suits, values) ||
     isStraightFlush(suits, values) ||

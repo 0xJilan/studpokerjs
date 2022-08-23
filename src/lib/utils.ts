@@ -1,3 +1,13 @@
+export interface Deck {
+  suits: string[];
+  values: number[];
+}
+export type HandName = string | boolean;
+export interface Resolution {
+  score: number | any;
+  handRank: string;
+  payout: number | any;
+}
 export enum HandRankings {
   NOTHING = 0,
   ACE_AND_KING = 100,
@@ -24,13 +34,3 @@ export enum HandPayouts {
   STRAIGHT_FLUSH = 50,
   ROYAL_FLUSH = 100,
 }
-export interface Resolution {
-  score: number | any;
-  handRank: string;
-  payout: number | any;
-}
-export interface Deck {
-  suits: string[];
-  values: number[];
-}
-export type HandNameOrFalse = string | boolean;
