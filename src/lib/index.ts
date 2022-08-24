@@ -11,6 +11,8 @@ export {
   isStraightFlush,
   isRoyalFlush,
   getHandName,
+  isQualified,
+  getWinner,
 } from "./checker";
 export {
   generateDeck,
@@ -18,4 +20,4 @@ export {
   distributeDeck,
   splitBySuitsAndValues,
 } from "./deck";
-export { getPoints, resolveHand } from "./resolver";
+export { getPoints, resolveHand, resolveGame } from "./resolver";

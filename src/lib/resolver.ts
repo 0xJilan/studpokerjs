@@ -50,6 +50,8 @@ export const getPoints = (rank: string, values: number[]): number => {
     ? sum(duplicates.slice(2))
     : rank === "FULL"
     ? duplicates[2] * 3
+    : rank === "ACE_AND_KING" || rank === "NOTHING"
+    ? 0
     : sum(values);
 };
 

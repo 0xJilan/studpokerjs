@@ -10,8 +10,10 @@ import {
   isStraightFlush,
   isRoyalFlush,
   getHandName,
+  isQualified,
+  getWinner,
 } from "../src/lib/checker";
-import { valuesOf, suitsOf } from "../src/lib/mocks";
+import { valuesOf, suitsOf, handOf } from "../src/lib/mocks";
 
 describe("check if hand contains Ace & King", () => {
   it("must be false if not contains Ace & King", () => {
@@ -140,6 +142,31 @@ describe("Rank received hand", () => {
   it("must return ROYAL_FLUSH even if contains Highstraight and flush", () => {
     expect(getHandName(suitsOf.Flush, valuesOf.HighStraight)).toBe(
       "ROYAL_FLUSH"
+    );
+  });
+});
+describe("check if resolved hand is qualified ", () => {
+  it("true if score >= 100", () => {
+    expect(isQualified(handOf.TwoPairs)).toBe(true);
+  });
+  it("false if score < 100", () => {
+    expect(isQualified(handOf.Nothing)).toBe(false);
+  });
+});
+describe("must return the winner", () => {
+  it("Bank if score of the bank is more than player", () => {
+    expect(getWinner(handOf.TwoPairs.score, handOf.AceAndKing.score)).toBe(
+      "Bank"
+    );
+  });
+  it("Bank if bank score equals player score", () => {
+    expect(getWinner(handOf.AceAndKing.score, handOf.AceAndKing.score)).toBe(
+      "Bank"
+    );
+  });
+  it("Player if bank score is less than player score", () => {
+    expect(getWinner(handOf.AceAndKing.score, handOf.TwoPairs.score)).toBe(
+      "Player"
     );
   });
 });

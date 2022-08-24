@@ -4,7 +4,7 @@ import { valuesOf, suitsOf } from "../src/lib/mocks";
 
 describe("Calculates the value of the hand", () => {
   it("must add up all the values of the hand", () => {
-    expect(getPoints("NOTHING", valuesOf.Nothing)).toEqual(38);
+    expect(getPoints("NOTHING", valuesOf.Nothing)).toEqual(0);
   });
   it("must add up the value of each of the cards that make up the pair", () => {
     expect(getPoints("ONE_PAIR", valuesOf.OnePair)).toEqual(6);

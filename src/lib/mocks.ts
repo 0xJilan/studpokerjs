@@ -39,3 +39,9 @@ export const suitsOf = {
   Nothing: ["C", "C", "D", "H", "S"],
   Flush: ["C", "C", "C", "C", "C"],
 };
+
+export const handOf = {
+  Nothing: { score: 0, handRank: "TWO_PAIRS" },
+  AceAndKing: { score: 100, handRank: "ACE_AND_KINGS" },
+  TwoPairs: { score: 320, handRank: "TWO_PAIRS" },
+};
