@@ -1,15 +1,6 @@
 import { Deck } from "./utils";
 
-/**
- * @param {string []} suits Array conmposed by 4 suits of card game
- * @exemple suits => ["H", "C", "D", "S"]
- */
 const suits: string[] = ["H", "C", "D", "S"];
-
-/**
- * @param {number []} values Array containing values between 2 and 14 inclusive
- * @exemple values => [2, 3, ..., 13, 14]
- */
 const values: number[] = [...Array(13)].map((_, index) => index + 2);
 
 /**
