@@ -1,12 +1,12 @@
 import {
-  createDeckFromCards,
+  generateDeck,
   shuffleDeck,
   distributeDeck,
   splitBySuitsAndValues,
 } from "../src/lib/deck";
 import { isSuits, isValues } from "../src/lib/mocks";
 
-const deck = createDeckFromCards();
+const deck = generateDeck();
 const deckShuffled = shuffleDeck(deck);
 const setOfCards = distributeDeck(deckShuffled);
 
@@ -30,23 +30,14 @@ describe("Shuffle cards", () => {
 
 describe("Distribute cards", () => {
   const distributedDecks = distributeDeck(deckShuffled);
-
-  it("must return at least two arrays", () => {
-    expect(distributedDecks.length >= 2).toBe(true);
+  it("must return two arrays", () => {
+    expect(distributedDecks.length === 2).toBe(true);
   });
   it("must return differents array", () => {
     const isSame = distributedDecks[0].every(
       (card, index) => card === distributedDecks[1][index]
     );
     expect(isSame).toBe(false);
-  });
-  it("must return 3 decks for 3 players", () => {
-    const setOfThree = distributeDeck(deckShuffled, 3);
-    expect(setOfThree.length).toBe(3);
-  });
-  it("must return 5 decks for 5 players", () => {
-    const setOfFive = distributeDeck(deckShuffled, 5);
-    expect(setOfFive.length).toBe(5);
   });
 });
 describe("Split deck by values and suits", () => {

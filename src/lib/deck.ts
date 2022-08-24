@@ -1,28 +1,52 @@
 import { Deck } from "./utils";
-//TODO: Check how Add doc for other thing that function (constante, interface, type, etc...)
+
+/**
+ * @param {string []} suits Array conmposed by 4 suits of card game
+ * @exemple suits => ["H", "C", "D", "S"]
+ */
 const suits: string[] = ["H", "C", "D", "S"];
-const values: number[] = [...Array(13)].map((_, index) => index + 2); //2 to 14
 
-export const createDeckFromCards = (): string[] => {
-  let newDeck: string[] = [];
-  suits.map((suit) => values.map((value) => newDeck.push(value + "-" + suit)));
-  return newDeck;
-};
+/**
+ * @param {number []} values Array containing values between 2 and 14 inclusive
+ * @exemple values => [2, 3, ..., 13, 14]
+ */
+const values: number[] = [...Array(13)].map((_, index) => index + 2);
 
+/**
+ * Build a 52 cards deck from suits and values
+ * @returns {string []} Array of all possible cards
+ * @exemple generateDeck() => [ '2-H','...','14-H','2-C','...','14-C,'2-D', '...','14-D','2-S'...','14-S']
+ */
+export const generateDeck = (): string[] =>
+  suits.flatMap((suit) => values.map((value) => value + "-" + suit));
+
+/**
+ * Shuffle values contained in array
+ * @param {string []} deck Array of string who represent each card of deck
+ * @returns {string []} Array of 52 string shuffled
+ * @exemple shuffleDeck(deck) => [ '5-H','7-S','5-D','10-D', ...]
+ */
 export const shuffleDeck = (deck: string[]): string[] => {
   return [...deck].sort(() => 0.5 - Math.random());
 };
 
-export const distributeDeck = (
-  shuffledDeck: string[],
-  numberOfPlayer: number = 2
-): string[][] => {
-  const cardsByPlayer: number = 5;
-  return [...Array(numberOfPlayer)].map((_, i) =>
-    shuffledDeck.slice(i * cardsByPlayer, i * cardsByPlayer + cardsByPlayer)
-  );
-};
+/**
+ * Split an array of string in two
+ * @param {string []} shuffledDeck Array of shuffled string who represent each card of deck
+ * @returns {string [][]} Two nested array of string who contains 5 cards each.
+ * @exemple shuffleDeck(deck) => [ [ '5-S', '8-H', '8-S', '5-H', '6-S' ],[ '9-S', '3-D', '3-C', '14-D', '4-H' ] ]
+ */
+export const distributeDeck = (shuffledDeck: string[]): string[][] => [
+  shuffledDeck.slice(0, 5),
+  shuffledDeck.slice(5, 10),
+];
 
+/**
+ * Split an array by suits and values
+ * @param {string []} deck Array of 5 cards
+ * @returns {Deck} Object that contains two arrays of suits & values
+ * @exemple splitBySuitsAndValues([3-D, 9-H, 3-S, 10-H, 4-C]) => {suits: ['D', 'H', 'S', 'H', 'C' ],values: [ 3, 9, 3, 10, 4 ]}
+ */
 export const splitBySuitsAndValues = (deck: string[]): Deck => {
   return {
     suits: deck.map((card) => card.split("-")[1]),
