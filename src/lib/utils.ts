@@ -3,9 +3,14 @@ export interface Deck {
   values: number[];
 }
 export type HandName = string | boolean;
-export interface Resolution {
+export interface HandResolution {
   score: number | any;
   handRank: string;
+}
+
+export interface GameResolution {
+  winner: string;
+  isBankQualified: boolean;
   payout: number | any;
 }
 export enum HandRankings {

@@ -1,5 +1,11 @@
 import { getDuplicates, sum, getHandName } from "./checker";
-import { HandRankings, HandPayouts, Resolution, Deck } from "./utils";
+import {
+  HandRankings,
+  HandPayouts,
+  HandResolution,
+  GameResolution,
+  Deck,
+} from "./utils";
 
 /**
  * Check if a given array only contains number
@@ -44,10 +50,10 @@ export const getPoints = (rank: string, values: number[]): number => {
 /**
  * Resolves a hand by determining the value of its score, the name of the combination it contains and the coeff to paid
  * @param {Deck} hand Object that contains two arrays of suits and values
- * @returns {Resolution} Object tha contain score, name of combination and payout
- * @exemple resolveHand({suits:['C','D','D','H','S'], values:[2,2,8,11,11]}) => {score: 322, handRank: 'TWO_PAIRS', payout: 2}
+ * @returns {Resolution} Object tha contain score, name of combination
+ * @exemple resolveHand({suits:['C','D','D','H','S'], values:[2,2,8,11,11]}) => {score: 322, handRank: 'TWO_PAIRS'}
  */
-export const resolveHand = (hand: Deck): Resolution => {
+export const resolveHand = (hand: Deck): HandResolution => {
   const { suits, values } = hand;
   const sortedSuits = sortByType(suits);
   const sortedValues = sortByType(values);
@@ -55,8 +61,12 @@ export const resolveHand = (hand: Deck): Resolution => {
   return {
     score: HandRankings[ranking] + getPoints(ranking, sortedValues),
     handRank: ranking,
-    payout: HandPayouts[ranking],
   };
 };
+
+export const resolveGame = (
+  bankResolverHand: HandResolution,
+  playerResolverHand: HandResolution
+): GameResolution => {};
 
 //TODO: ADD A FUNCTION WHO COMPARE TWO HANDS AND RETURN WINNER
