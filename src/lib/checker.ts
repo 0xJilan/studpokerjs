@@ -87,8 +87,8 @@ export const sum = (values: number[]): number =>
  * @param {number []} values Array of card values
  * @returns {boolean} true || false
  * @exemple
- * * isLowStraight([2, 3, 4, 5, 14]) => true
- * * isLowStraight([2, 3, 4, 5, 6]) => false
+ * * isLowStraight([2,3,4,5,14]) => true
+ * * isLowStraight([2,3,4,5,6]) => false
  */
 const isLowStraight = (values: number[]): boolean =>
   [2, 3, 4, 5, 14].every((val, index) => val === values[index]);
@@ -98,8 +98,8 @@ const isLowStraight = (values: number[]): boolean =>
  * @param {number []} values Array of card values
  * @returns {boolean} true || false
  * @exemple
- * * isRegularStraight([2, 3, 4, 5, 6]) => true
- * * isRegularStraight([2, 3, 4, 5, 7]) => false
+ * * isRegularStraight([2,3,4,5,6]) => true
+ * * isRegularStraight([2,3,4,5,7]) => false
  */
 const isRegularStraight = (values: number[]): HandName =>
   values.every((value, index, array) =>
@@ -110,7 +110,7 @@ const isRegularStraight = (values: number[]): HandName =>
  * Check if sorted array contains a low or regular straight
  * @param {number []} values Array of card values
  * @returns {boolean} 'COMBINATION_NAME'|| false
- * @exemple isStraight([2, 3, 4, 5, 6])  => "STRAIGHT"
+ * @exemple isStraight([2,3,4,5,6])  => "STRAIGHT"
  */
 export const isStraight = (values: number[]): HandName =>
   (isLowStraight(values) || isRegularStraight(values)) && "STRAIGHT";
@@ -119,7 +119,7 @@ export const isStraight = (values: number[]): HandName =>
  * Check if sorted array contains a flush because 1st === 4th
  * @param {string []} suits Array of card suits
  * @returns {boolean} 'COMBINATION_NAME'|| false
- * @exemple isFlush(['C', 'C', 'C', 'C', 'C'])  => "FLUSH"
+ * @exemple isFlush(['C','C','C','C','C'])  => "FLUSH"
  */
 export const isFlush = (suits: string[]): HandName =>
   suits[0] === suits[4] && "FLUSH";
@@ -127,9 +127,9 @@ export const isFlush = (suits: string[]): HandName =>
 /**
  * Check if sorted array of suits contains a flush and sorted array of values is straight
  * @param {string []} suits Array of card suits
- * @param {string []} suits Array of card values
+ * @param {number []} values Array of card values
  * @returns {boolean} 'COMBINATION_NAME'|| false
- * @exemple isStraightFlush(['C', 'C', 'C', 'C', 'C'], [2, 3, 4, 5, 6])  => "STRAIGHT_FLUSH"
+ * @exemple isStraightFlush(['C','C','C','C','C'],[2,3,4,5,6])  => "STRAIGHT_FLUSH"
  */
 export const isStraightFlush = (suits: string[], values: number[]): HandName =>
   isFlush(suits) && isRegularStraight(values) && "STRAIGHT_FLUSH";
@@ -137,9 +137,33 @@ export const isStraightFlush = (suits: string[], values: number[]): HandName =>
 /**
  * Check if sorted array of suits contains a flush and if sorted values === 60 (sum of all values contained in high straight)
  * @param {string []} suits Array of card suits
- * @param {string []} suits Array of card values
+ * @param {number []} values Array of card values
  * @returns {boolean} 'COMBINATION_NAME'|| false
- * @exemple isRoyalFlush(['C', 'C', 'C', 'C', 'C'], [10, 11, 12, 13, 14])  => "ROYAL_FLUSH"
+ * @exemple isRoyalFlush(['C','C','C','C','C'],[10,11,12,13,14])  => "ROYAL_FLUSH"
  */
 export const isRoyalFlush = (suits: string[], values: number[]): HandName =>
   isFlush(suits) && sum(values) === 60 && "ROYAL_FLUSH";
+
+/**
+ * Checks by hierarchical order the combination contained in two arrays of suits & values
+ * @param {string []} suits Array of card suits
+ * @param {number []} values Array of card values
+ * @returns {HandName} 'COMBINATION_NAME'|| 'NOTHING'
+ * @exemple getHandName(['C','D','H','H','S'],[2,4,6,6,11])  => "ONE_PAIR"
+ */
+export const getHandName = (suits: string[], values: number[]): HandName => {
+  const duplicates: number[] = getDuplicates(values);
+  return (
+    isRoyalFlush(suits, values) ||
+    isStraightFlush(suits, values) ||
+    isFourOfKind(duplicates) ||
+    isFull(duplicates) ||
+    isFlush(suits) ||
+    isStraight(values) ||
+    isThreeOfKind(duplicates) ||
+    isTwoPairs(duplicates) ||
+    isOnePair(duplicates) ||
+    isAceKing(values) ||
+    "NOTHING"
+  );
+};

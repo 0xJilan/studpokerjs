@@ -1,57 +1,6 @@
-import { getRanking, getPoints, resolveHand } from "../src/lib/resolver";
+import { getPoints, resolveHand } from "../src/lib/resolver";
 import { Resolution } from "../src/lib/utils";
 import { valuesOf, suitsOf } from "../src/lib/mocks";
-
-describe("Rank received hand", () => {
-  it("must return NOTHING if contains neither combinaison of suits or values", () => {
-    expect(getRanking(suitsOf.Nothing, valuesOf.Nothing)).toBe("NOTHING");
-  });
-  it("must return ACE_AND_KING if contains Ace & King", () => {
-    expect(getRanking(suitsOf.Nothing, valuesOf.AceAndKing)).toBe(
-      "ACE_AND_KING"
-    );
-  });
-  it("values return ONE_PAIR if contains One pair", () => {
-    expect(getRanking(suitsOf.Nothing, valuesOf.OnePair)).toBe("ONE_PAIR");
-  });
-  it("must return TWO_PAIRS if contains Two pairs", () => {
-    expect(getRanking(suitsOf.Nothing, valuesOf.TwoPairs)).toBe("TWO_PAIRS");
-  });
-  it("must return THREE_OF_KIND if contains Three of kind", () => {
-    expect(getRanking(suitsOf.Nothing, valuesOf.ThreeOfKind)).toBe(
-      "THREE_OF_KIND"
-    );
-  });
-  it("must return STRAIGHT if contains a straight", () => {
-    expect(getRanking(suitsOf.Nothing, valuesOf.RegularStraight)).toBe(
-      "STRAIGHT"
-    );
-  });
-  it("must return FLUSH if contains a flush", () => {
-    expect(getRanking(suitsOf.Flush, valuesOf.Nothing)).toBe("FLUSH");
-  });
-  it("must return FLUSH even if contains a two pairs", () => {
-    expect(getRanking(suitsOf.Flush, valuesOf.TwoPairs)).toBe("FLUSH");
-  });
-  it("must return FULL if contains a One pair and Three Of Kind", () => {
-    expect(getRanking(suitsOf.Nothing, valuesOf.Full)).toBe("FULL");
-  });
-  it("must return FOUR_OF_KIND if contains Four Of Kind", () => {
-    expect(getRanking(suitsOf.Nothing, valuesOf.FourOfKind)).toBe(
-      "FOUR_OF_KIND"
-    );
-  });
-  it("must return STRAIGHT_FLUSH if contains  straight and flush", () => {
-    expect(getRanking(suitsOf.Flush, valuesOf.RegularStraight)).toBe(
-      "STRAIGHT_FLUSH"
-    );
-  });
-  it("must return ROYAL_FLUSH even if contains Highstraight and flush", () => {
-    expect(getRanking(suitsOf.Flush, valuesOf.HighStraight)).toBe(
-      "ROYAL_FLUSH"
-    );
-  });
-});
 
 describe("Calculates the value of the hand", () => {
   it("must add up all the values of the hand", () => {

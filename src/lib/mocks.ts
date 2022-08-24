@@ -1,12 +1,24 @@
 import { getDuplicates } from "./checker";
 
-export const isSuits = (currentValue: any): boolean =>
+/**
+ * Check if a given letter is a valid suits
+ * @param {string} currentValue string value to check
+ * @returns {boolean} true if is a suits || false
+ * @exemple isSuits('V') => false
+ */
+export const isSuits = (currentValue: string): boolean =>
   currentValue === "H" ||
   currentValue === "D" ||
   currentValue === "C" ||
   currentValue === "S";
 
-export const isValues = (currentValue: any): boolean =>
+/**
+ * Check if a given number is a valid value
+ * @param {number} currentValue number value to check
+ * @returns {boolean} true if is a number include between 2 & 14 || false
+ * @exemple isValues(15) => false
+ */
+export const isValues = (currentValue: number): boolean =>
   typeof currentValue == "number" && currentValue >= 2 && currentValue <= 14;
 
 export const valuesOf = {

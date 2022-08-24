@@ -1,3 +1,21 @@
-export { substract } from "./substract";
-export { sum } from "./sum";
-export { multiply } from "./multiply";
+export {
+  isAceKing,
+  getDuplicates,
+  isOnePair,
+  isTwoPairs,
+  isThreeOfKind,
+  isFull,
+  isFourOfKind,
+  isStraight,
+  isFlush,
+  isStraightFlush,
+  isRoyalFlush,
+  getHandName,
+} from "./checker";
+export {
+  generateDeck,
+  shuffleDeck,
+  distributeDeck,
+  splitBySuitsAndValues,
+} from "./deck";
+export { getPoints, resolveHand } from "./resolver";

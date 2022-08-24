@@ -9,6 +9,7 @@ import {
   isFourOfKind,
   isStraightFlush,
   isRoyalFlush,
+  getHandName,
 } from "../src/lib/checker";
 import { valuesOf, suitsOf } from "../src/lib/mocks";
 
@@ -90,5 +91,55 @@ describe("check if hand contains staight", () => {
   });
   it("it must return false if not contains royal flush", () => {
     expect(isRoyalFlush(suitsOf.Nothing, valuesOf.RegularStraight)).toBe(false);
+  });
+});
+describe("Rank received hand", () => {
+  it("must return NOTHING if contains neither combinaison of suits or values", () => {
+    expect(getHandName(suitsOf.Nothing, valuesOf.Nothing)).toBe("NOTHING");
+  });
+  it("must return ACE_AND_KING if contains Ace & King", () => {
+    expect(getHandName(suitsOf.Nothing, valuesOf.AceAndKing)).toBe(
+      "ACE_AND_KING"
+    );
+  });
+  it("values return ONE_PAIR if contains One pair", () => {
+    expect(getHandName(suitsOf.Nothing, valuesOf.OnePair)).toBe("ONE_PAIR");
+  });
+  it("must return TWO_PAIRS if contains Two pairs", () => {
+    expect(getHandName(suitsOf.Nothing, valuesOf.TwoPairs)).toBe("TWO_PAIRS");
+  });
+  it("must return THREE_OF_KIND if contains Three of kind", () => {
+    expect(getHandName(suitsOf.Nothing, valuesOf.ThreeOfKind)).toBe(
+      "THREE_OF_KIND"
+    );
+  });
+  it("must return STRAIGHT if contains a straight", () => {
+    expect(getHandName(suitsOf.Nothing, valuesOf.RegularStraight)).toBe(
+      "STRAIGHT"
+    );
+  });
+  it("must return FLUSH if contains a flush", () => {
+    expect(getHandName(suitsOf.Flush, valuesOf.Nothing)).toBe("FLUSH");
+  });
+  it("must return FLUSH even if contains a two pairs", () => {
+    expect(getHandName(suitsOf.Flush, valuesOf.TwoPairs)).toBe("FLUSH");
+  });
+  it("must return FULL if contains a One pair and Three Of Kind", () => {
+    expect(getHandName(suitsOf.Nothing, valuesOf.Full)).toBe("FULL");
+  });
+  it("must return FOUR_OF_KIND if contains Four Of Kind", () => {
+    expect(getHandName(suitsOf.Nothing, valuesOf.FourOfKind)).toBe(
+      "FOUR_OF_KIND"
+    );
+  });
+  it("must return STRAIGHT_FLUSH if contains  straight and flush", () => {
+    expect(getHandName(suitsOf.Flush, valuesOf.RegularStraight)).toBe(
+      "STRAIGHT_FLUSH"
+    );
+  });
+  it("must return ROYAL_FLUSH even if contains Highstraight and flush", () => {
+    expect(getHandName(suitsOf.Flush, valuesOf.HighStraight)).toBe(
+      "ROYAL_FLUSH"
+    );
   });
 });
