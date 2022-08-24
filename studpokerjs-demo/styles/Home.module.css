@@ -20,6 +20,11 @@
   color: #e7ae23;
   font-size: 1.8rem;
 }
+.version {
+  font-family: Monoton-Regular;
+  color: #e7ae23;
+  font-size: 0.8rem;
+}
 
 @media (min-width: 768px) {
   .title {
