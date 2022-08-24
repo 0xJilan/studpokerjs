@@ -9,8 +9,8 @@ export interface HandResolution {
 }
 
 export interface GameResolution {
-  winner: string;
   isBankQualified: boolean;
+  winner: string;
   payout: number | any;
 }
 export enum HandRankings {

@@ -176,3 +176,13 @@ export const getHandName = (suits: string[], values: number[]): HandName => {
  */
 export const isQualified = (resolvedHand: HandResolution): boolean =>
   resolvedHand.score >= 100;
+
+/**
+ * Get winner between two players
+ * @param {number} bankScore Score of Bank
+ * @param {number} playerScore Score of Player
+ * @returns {string} return player who have the best score. Bank win if score is equals or more than player score
+ * @exemple getWinner(212, 345)  => 'Player';
+ */
+export const getWinner = (bankScore: number, playerScore: number): string =>
+  bankScore >= playerScore ? "Bank" : "Player";
