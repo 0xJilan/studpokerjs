@@ -1,4 +1,4 @@
-import { HandName } from "./utils";
+import { HandName, HandResolution } from "./utils";
 
 /**
  * Check if sorted array contains Ace(14) & King(13) combination
@@ -167,3 +167,12 @@ export const getHandName = (suits: string[], values: number[]): HandName => {
     "NOTHING"
   );
 };
+
+/**
+ * Check if resolved hand is qualified
+ * @param {Resolution} resolvedHand Object containing score, combination name
+ * @returns {boolean} true if score is equal to ACE_AND_KING or more || false
+ * @exemple isQualified({score: 100, handRank: "ACE_AND_KING"})  => true
+ */
+export const isQualified = (resolvedHand: HandResolution): boolean =>
+  resolvedHand.score >= 100;

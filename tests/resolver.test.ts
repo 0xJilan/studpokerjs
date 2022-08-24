@@ -1,5 +1,5 @@
 import { getPoints, resolveHand } from "../src/lib/resolver";
-import { Resolution } from "../src/lib/utils";
+import { HandResolution } from "../src/lib/utils";
 import { valuesOf, suitsOf } from "../src/lib/mocks";
 
 describe("Calculates the value of the hand", () => {
@@ -38,10 +38,9 @@ describe("Resolve hand with rank and points", () => {
         suits: suitsOf.Nothing,
         values: valuesOf.TwoPairs,
       })
-    ).toMatchObject<Resolution>({
+    ).toMatchObject<HandResolution>({
       score: 316,
       handRank: "TWO_PAIRS",
-      payout: 2,
     });
   });
   it("must output this result for a given Hand of STRAIGHT", () => {
@@ -50,10 +49,9 @@ describe("Resolve hand with rank and points", () => {
         suits: suitsOf.Nothing,
         values: valuesOf.RegularStraight,
       })
-    ).toMatchObject<Resolution>({
+    ).toMatchObject<HandResolution>({
       score: 530,
       handRank: "STRAIGHT",
-      payout: 4,
     });
   });
   it("must output this result for a given Hand of ROYAL FLUSh", () => {
@@ -62,10 +60,9 @@ describe("Resolve hand with rank and points", () => {
         suits: suitsOf.Flush,
         values: valuesOf.HighStraight,
       })
-    ).toMatchObject<Resolution>({
+    ).toMatchObject<HandResolution>({
       score: 1060,
       handRank: "ROYAL_FLUSH",
-      payout: 100,
     });
   });
 });
