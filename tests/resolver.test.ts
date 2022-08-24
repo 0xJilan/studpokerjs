@@ -1,6 +1,6 @@
-import { getPoints, resolveHand } from "../src/lib/resolver";
-import { HandResolution } from "../src/lib/utils";
-import { valuesOf, suitsOf } from "../src/lib/mocks";
+import { getPoints, resolveHand, resolveGame } from "../src/lib/resolver";
+import { HandResolution, GameResolution } from "../src/lib/utils";
+import { valuesOf, suitsOf, handOf } from "../src/lib/mocks";
 
 describe("Calculates the value of the hand", () => {
   it("must add up all the values of the hand", () => {
@@ -63,6 +63,45 @@ describe("Resolve hand with rank and points", () => {
     ).toMatchObject<HandResolution>({
       score: 1060,
       handRank: "ROYAL_FLUSH",
+    });
+  });
+});
+
+describe("Resolve game with by comparing bank and player hands", () => {
+  it("must output this result for draw between bank and player with the same TWO PAIRS", () => {
+    expect(
+      resolveGame(handOf.TwoPairs, handOf.TwoPairs)
+    ).toMatchObject<GameResolution>({
+      isBankQualified: true,
+      winner: "Bank",
+      payout: 0,
+    });
+  });
+  it("must output this result for bank win player with Straight", () => {
+    expect(
+      resolveGame(handOf.RegularStraight, handOf.TwoPairs)
+    ).toMatchObject<GameResolution>({
+      isBankQualified: true,
+      winner: "Bank",
+      payout: 0,
+    });
+  });
+  it("must output this result for player win Bank with ThreeOfKind", () => {
+    expect(
+      resolveGame(handOf.TwoPairs, handOf.ThreeOfKind)
+    ).toMatchObject<GameResolution>({
+      isBankQualified: true,
+      winner: "Player",
+      payout: 3,
+    });
+  });
+  it("must output this result for player win Bank but Bank not qualified", () => {
+    expect(
+      resolveGame(handOf.Nothing, handOf.RegularStraight)
+    ).toMatchObject<GameResolution>({
+      isBankQualified: false,
+      winner: "Player",
+      payout: 0,
     });
   });
 });

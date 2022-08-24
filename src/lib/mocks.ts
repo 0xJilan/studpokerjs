@@ -41,7 +41,9 @@ export const suitsOf = {
 };
 
 export const handOf = {
-  Nothing: { score: 0, handRank: "TWO_PAIRS" },
+  Nothing: { score: 0, handRank: "NOTHING" },
   AceAndKing: { score: 100, handRank: "ACE_AND_KINGS" },
   TwoPairs: { score: 320, handRank: "TWO_PAIRS" },
+  ThreeOfKind: { score: 445, handRank: "THREE_OF_KIND" },
+  RegularStraight: { score: 536, handRank: "STRAIGHT" },
 };
