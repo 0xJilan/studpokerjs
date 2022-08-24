@@ -16,7 +16,7 @@ const LayoutWrapper = styled.div`
   }
 `;
 const Main = styled.main`
-  padding: 2rem;
+  padding: 0.2rem;
   height: 100%;
   width: 100%;
   display: flex;
@@ -25,15 +25,28 @@ const Main = styled.main`
   align-items: center;
   border: 0.2rem solid #e7ae23;
   border-radius: 0.5rem;
+  @media (min-width: 768px) {
+    padding: 0.6rem;
+  }
+  @media (min-width: 1180px) {
+    padding: 1rem;
+  }
 `;
 const LogoWrapper = styled.div`
   display: flex;
   flex-direction: row;
   align-items: baseline;
 `;
+const Section = styled.section`
+  height: 70%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+`;
 
 type Props = {
-  children: JSX.Element;
+  children: React.ReactNode;
 };
 
 export const Layout: React.FC<Props> = ({ children }) => {
@@ -49,7 +62,7 @@ export const Layout: React.FC<Props> = ({ children }) => {
           <BigTitle>STUDPOKER.JS</BigTitle>
           <Version>v {PackageJSON.version}</Version>
         </LogoWrapper>
-        {children}
+        <Section>{children}</Section>
       </Main>
     </LayoutWrapper>
   );

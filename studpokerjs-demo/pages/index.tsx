@@ -1,10 +1,15 @@
 import type { NextPage } from "next";
 import { Layout } from "components/Layout";
+import { Input } from "components/Input";
+import { Output } from "components/Output";
+import { Helper } from "components/Helper";
 
 const Home: NextPage = () => {
   return (
     <Layout>
-      <div>TEST</div>
+      <Helper />
+
+      <Input>Je Test</Input>
     </Layout>
   );
 };
