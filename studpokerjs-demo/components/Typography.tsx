@@ -25,14 +25,14 @@ export const Version = styled(Title)`
 export const Text = styled.span`
   font-size: 0.6rem;
   font-family: Bungee-Regular;
-`;
-export const Regular = styled(Text)`
-  color: #ccc9c8;
-  margin-bottom: 0.6rem;
   @media (min-width: 768px) {
     font-size: 0.8rem;
   }
   @media (min-width: 1180) {
     font-size: 1rem;
   }
+`;
+export const Regular = styled(Text)`
+  color: #ccc9c8;
+  margin-bottom: 0.6rem;
 `;
