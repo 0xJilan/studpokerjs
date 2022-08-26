@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { useEffect, useRef } from "react";
-import { Text, Regular } from "components/Typography";
+import { Text } from "components/Typography";
 import { Blink } from "components/Animations";
 
 const Guest = styled(Text)`
@@ -19,20 +19,11 @@ const InputWrapper = styled.div`
   margin-right: 0.2rem;
   margin-bottom: 0.4rem;
 `;
-const GuestInput = styled.input`
-  border: none;
-  background-color: transparent;
-  resize: none;
-  outline: none;
+const CommandInput = styled.span`
   font-size: 0.6rem;
   margin-left: 0.5rem;
   color: #ccc9c8;
   font-family: Bungee-Regular;
-  border-left: 1px solid transparent;
-  animation: ${Blink} 1.5s cubic-bezier(0.215, 0.61, 0.355, 1) forwards infinite;
-  &:focus {
-    animation: none;
-  }
   @media (min-width: 768px) {
     font-size: 0.8rem;
   }
@@ -40,30 +31,29 @@ const GuestInput = styled.input`
     font-size: 1rem;
   }
 `;
+const GuestInput = styled(CommandInput).attrs({ as: "input" })`
+  border: none;
+  background-color: transparent;
+  resize: none;
+  outline: none;
+  border-left: 1px solid transparent;
+  animation: ${Blink} 1.5s cubic-bezier(0.215, 0.61, 0.355, 1) forwards infinite;
+  &:focus {
+    animation: none;
+  }
+`;
 type InputProps = {
   setCommand: (text: string) => void;
   command: string;
 };
 
-export const Input: React.FC<InputProps> = ({ setCommand, command }) => {
+const Input: React.FC<InputProps> = ({ setCommand, command }) => {
   const inputElement = useRef<HTMLInputElement>(null);
   useEffect(() => {
     if (inputElement.current) {
       inputElement.current.focus();
     }
-    const keyDownHandler = (e: any) => {
-      if (e.key === "Enter") {
-        e.preventDefault();
-        console.log("pressed Enter ✅");
-        setCommand("");
-      }
-    };
-    document.addEventListener("keydown", keyDownHandler);
-    return () => {
-      document.removeEventListener("keydown", keyDownHandler);
-    };
   }, []);
-  console.log("render Input");
 
   return (
     <InputWrapper>
@@ -72,12 +62,7 @@ export const Input: React.FC<InputProps> = ({ setCommand, command }) => {
       <Location>localhost</Location>
       <Sign>:$ ~ </Sign>
       <GuestInput
-        type="text"
-        required
         ref={inputElement}
-        autoComplete="off"
-        value={command}
-        name="command"
         onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
           setCommand(e.target.value)
         }
@@ -85,3 +70,20 @@ export const Input: React.FC<InputProps> = ({ setCommand, command }) => {
     </InputWrapper>
   );
 };
+
+type InputDisplayProps = {
+  commandDisplay: string;
+};
+const InputDisplay: React.FC<InputDisplayProps> = ({ commandDisplay }) => {
+  return (
+    <InputWrapper>
+      <Guest>guest</Guest>
+      <Sign>@</Sign>
+      <Location>localhost</Location>
+      <Sign>:$ ~ </Sign>
+      <CommandInput>{commandDisplay}</CommandInput>
+    </InputWrapper>
+  );
+};
+
+export { Input, InputDisplay };

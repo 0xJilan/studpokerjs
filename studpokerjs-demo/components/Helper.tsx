@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import React, { useMemo } from "react";
+import React from "react";
 import { Output } from "components/Output";
 
 const HelperContainer = styled.div`
@@ -22,8 +22,6 @@ const HelperWrapper = styled.div`
 `;
 
 export const Helper: React.FC = () => {
-  console.log("render Helper");
-
   return (
     <HelperContainer>
       <Output>Available commands:</Output>
