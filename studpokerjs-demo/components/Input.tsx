@@ -19,7 +19,7 @@ const InputWrapper = styled.div`
   margin-right: 0.2rem;
   margin-bottom: 0.4rem;
 `;
-const CommandInput = styled.span`
+const CommandInput = styled.input`
   font-size: 0.6rem;
   margin-left: 0.5rem;
   color: #ccc9c8;
@@ -31,6 +31,7 @@ const CommandInput = styled.span`
     font-size: 1rem;
   }
 `;
+const HistoryInput = styled(CommandInput).attrs({ as: "span" })``;
 const GuestInput = styled(CommandInput).attrs({ as: "input" })`
   border: none;
   background-color: transparent;
@@ -62,7 +63,12 @@ const Input: React.FC<InputProps> = ({ setCommand, command }) => {
       <Location>localhost</Location>
       <Sign>:$ ~ </Sign>
       <GuestInput
+        type="text"
+        autoComplete="off"
+        autoFocus
         ref={inputElement}
+        value={command}
+        name="command"
         onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
           setCommand(e.target.value)
         }
@@ -81,7 +87,7 @@ const InputDisplay: React.FC<InputDisplayProps> = ({ commandDisplay }) => {
       <Sign>@</Sign>
       <Location>localhost</Location>
       <Sign>:$ ~ </Sign>
-      <CommandInput>{commandDisplay}</CommandInput>
+      <HistoryInput>{commandDisplay}</HistoryInput>
     </InputWrapper>
   );
 };
