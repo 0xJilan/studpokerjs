@@ -17,7 +17,6 @@ const InputWrapper = styled.div`
   flex-direction: row;
   align-items: baseline;
   margin-right: 0.2rem;
-  margin-bottom: 0.4rem;
 `;
 const CommandInput = styled.input`
   font-size: 0.6rem;
@@ -70,7 +69,7 @@ const Input: React.FC<InputProps> = ({ setCommand, command }) => {
         value={command}
         name="command"
         onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-          setCommand(e.target.value)
+          setCommand(String(e.target.value).toUpperCase())
         }
       />
     </InputWrapper>

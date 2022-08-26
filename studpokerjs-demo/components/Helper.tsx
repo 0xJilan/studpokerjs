@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import React from "react";
-import { Output } from "components/Output";
+import { Regular } from "components/Typography";
 
 const HelperContainer = styled.div`
   display: flex;
@@ -24,15 +24,15 @@ const HelperWrapper = styled.div`
 export const Helper: React.FC = () => {
   return (
     <HelperContainer>
-      <Output>Available commands:</Output>
+      <Regular>Available commands:</Regular>
       <HelperWrapper>
-        <Output>- rules</Output>
-        <Output>- play</Output>
-        <Output>- simulation</Output>
-        <Output>- docs</Output>
-        <Output>- npm</Output>
-        <Output>- twitter</Output>
-        <Output>- github</Output>
+        <Regular>- rules</Regular>
+        <Regular>- play</Regular>
+        <Regular>- simulation</Regular>
+        <Regular>- docs</Regular>
+        <Regular>- npm</Regular>
+        <Regular>- twitter</Regular>
+        <Regular>- github</Regular>
       </HelperWrapper>
     </HelperContainer>
   );
