@@ -26,13 +26,14 @@ export const Helper: React.FC = () => {
     <HelperContainer>
       <Regular>Available commands:</Regular>
       <HelperWrapper>
-        <Regular>- rules</Regular>
-        <Regular>- play</Regular>
-        <Regular>- simulation</Regular>
-        <Regular>- docs</Regular>
-        <Regular>- npm</Regular>
-        <Regular>- twitter</Regular>
-        <Regular>- github</Regular>
+        <Regular>- PLAY</Regular>
+        <Regular>- RULES</Regular>
+        <Regular>- SIMULATION</Regular>
+        <Regular>- DOCS</Regular>
+        <Regular>- GITHUB</Regular>
+        <Regular>- NPM</Regular>
+        <Regular>- TWITTER</Regular>
+        <Regular>- CLEAR</Regular>
       </HelperWrapper>
     </HelperContainer>
   );

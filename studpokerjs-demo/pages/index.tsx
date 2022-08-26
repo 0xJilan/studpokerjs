@@ -4,7 +4,7 @@ import { Layout } from "components/Layout";
 import { Helper } from "components/Helper";
 import { History } from "components/History";
 import { Input } from "components/Input";
-import { handleCommand } from "lib/handleCommand";
+import { handleOutput } from "lib/handleOutput";
 
 const Home: NextPage = () => {
   const [command, setCommand] = useState("");
@@ -14,10 +14,16 @@ const Home: NextPage = () => {
   const keyDownHandler = (e: any) => {
     if (e.key === "Enter") {
       e.preventDefault();
-      //Check
-      setCommandHistory((state) => [...state, command]);
-      setOutputHistory((state) => [...state, handleCommand(command)]);
-      setCommand("");
+      //ClearConsole
+      if (command === "CLEAR") {
+        setCommandHistory([]);
+        setOutputHistory([]);
+        setCommand("");
+      } else {
+        setCommandHistory((state) => [...state, command]);
+        setOutputHistory((state) => [...state, handleOutput(command)]);
+        setCommand("");
+      }
     }
   };
 
