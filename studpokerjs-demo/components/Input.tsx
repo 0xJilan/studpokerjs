@@ -4,10 +4,10 @@ import { Text } from "components/Typography";
 import { Blink } from "components/Animations";
 
 const Guest = styled(Text)`
-  color: #e25b69;
+  color: #00ec00;
 `;
 const Location = styled(Text)`
-  color: #a37db8;
+  color: #e25b69;
 `;
 const Sign = styled(Text)`
   color: #e7ae23;
@@ -22,7 +22,6 @@ const CommandInput = styled.input`
   font-size: 0.6rem;
   margin-left: 0.5rem;
   color: #ccc9c8;
-  font-family: Bungee-Regular;
   @media (min-width: 768px) {
     font-size: 0.8rem;
   }
@@ -57,7 +56,7 @@ const Input: React.FC<InputProps> = ({ setCommand, command }) => {
 
   return (
     <InputWrapper>
-      <Guest>guest</Guest>
+      <Guest>fren</Guest>
       <Sign>@</Sign>
       <Location>localhost</Location>
       <Sign>:$ ~ </Sign>

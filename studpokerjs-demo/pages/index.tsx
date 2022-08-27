@@ -7,6 +7,7 @@ import { Input } from "components/Input";
 import { handleOutput } from "lib/handleOutput";
 
 const Home: NextPage = () => {
+  const [mode, setMode] = useState("MENU");
   const [command, setCommand] = useState("");
   const [commandHistory, setCommandHistory] = useState([""]);
   const [outputHistory, setOutputHistory] = useState([""]);
@@ -14,15 +15,24 @@ const Home: NextPage = () => {
   const keyDownHandler = (e: any) => {
     if (e.key === "Enter") {
       e.preventDefault();
-      //ClearConsole
-      if (command === "CLEAR") {
-        setCommandHistory([]);
-        setOutputHistory([]);
-        setCommand("");
-      } else {
-        setCommandHistory((state) => [...state, command]);
-        setOutputHistory((state) => [...state, handleOutput(command)]);
-        setCommand("");
+      switch (command) {
+        case "CLEAR":
+          setCommandHistory([""]);
+          setOutputHistory([""]);
+          setCommand("");
+          break;
+        case "PLAY":
+          setMode("PLAY");
+          setCommandHistory([command]);
+          setOutputHistory([handleOutput(command)]);
+          setCommand("");
+          break;
+
+        default:
+          console.log("command trigger: ", command);
+          setCommandHistory((state) => [...state, command]);
+          setOutputHistory((state) => [...state, handleOutput(command)]);
+          setCommand("");
       }
     }
   };
@@ -36,8 +46,13 @@ const Home: NextPage = () => {
 
   return (
     <Layout>
-      <Helper />
-      <History commandHistory={commandHistory} outputHistory={outputHistory} />
+      <Helper mode={mode} />
+      {commandHistory.length > 1 && (
+        <History
+          commandHistory={commandHistory}
+          outputHistory={outputHistory}
+        />
+      )}
       <Input setCommand={setCommand} command={command} />
     </Layout>
   );

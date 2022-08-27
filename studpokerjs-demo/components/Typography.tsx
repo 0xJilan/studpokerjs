@@ -4,7 +4,9 @@ const Title = styled.span`
   color: #e7ae23;
   font-family: Monoton-Regular;
 `;
-export const BigTitle = styled(Title)`
+export const BigTitle = styled(Title).attrs({
+  as: "h1",
+})`
   font-size: 1.5rem;
   @media (min-width: 768px) {
     font-size: 3rem;
@@ -24,7 +26,6 @@ export const Version = styled(Title)`
 `;
 export const Text = styled.span`
   font-size: 0.6rem;
-  font-family: Bungee-Regular;
   @media (min-width: 768px) {
     font-size: 0.8rem;
   }
