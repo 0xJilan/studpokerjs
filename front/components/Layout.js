@@ -26,7 +26,6 @@ const Main = styled.main`
     padding: 1rem;
   }
 `;
-
 const Section = styled.section`
   height: 80%;
   width: 100%;

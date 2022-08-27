@@ -11,8 +11,8 @@ html,
 body {
   padding: 0;
   margin: 0;
-  font-family: SairaSemiCondensedRegular, sans-serif;
   font-family: Bungee-Regular, sans-serif;
+  color: #e8edef;
 }
 a {
   color: inherit;
@@ -21,5 +21,4 @@ a {
 
 * {
   box-sizing: border-box;
-  color: #ccc9c8;
 }
