@@ -8,9 +8,13 @@ const Home = () => {
   const [mode, setMode] = useState("MENU");
   console.log("data:", data);
 
+  const addToCart = () => {
+    dispatch({ type: "GET_FAUCET" });
+  };
   return (
     <Layout>
       <Helper mode={mode} data={data} />
+      <div onClick={() => addToCart()}>GETFAUCET</div>
     </Layout>
   );
 };

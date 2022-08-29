@@ -1,5 +1,6 @@
-import "../styles/globals.css";
+import "styles/globals.css";
 import React, { createContext, useReducer } from "react";
+import { DataReducer } from "lib/DataReducer";
 
 export const UserData = createContext();
 
@@ -11,8 +12,7 @@ const initialData = {
 };
 
 const MyApp = ({ Component, pageProps }) => {
-  const Reducers = () => {};
-  const [data, dispatch] = useReducer(Reducers, initialData);
+  const [data, dispatch] = useReducer(DataReducer, initialData);
 
   return (
     <UserData.Provider value={{ data, dispatch }}>
