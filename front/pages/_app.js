@@ -3,22 +3,19 @@ import React, { createContext, useReducer } from "react";
 
 export const UserData = createContext();
 
-const initailState = {
-  data: [
-    {
-      hands: 0,
-      wallet: 0,
-      wins: 0,
-      looses: 0,
-    },
-  ],
+const initialData = {
+  hands: 0,
+  wallet: 0,
+  wins: 0,
+  looses: 0,
 };
+
 const MyApp = ({ Component, pageProps }) => {
   const Reducers = () => {};
-  const [state, dispatch] = useReducer(Reducers, initailState);
+  const [data, dispatch] = useReducer(Reducers, initialData);
 
   return (
-    <UserData.Provider value={{ state, dispatch }}>
+    <UserData.Provider value={{ data, dispatch }}>
       <Component {...pageProps} />
     </UserData.Provider>
   );

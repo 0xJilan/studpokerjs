@@ -81,7 +81,7 @@ export const Helper = ({ mode, data }) => {
           width="100"
           color={orange}
           type="datas"
-          outputs={formatData(data[0])}
+          outputs={formatData(data)}
         />
       </DoubleBox>
       <HelperComponent

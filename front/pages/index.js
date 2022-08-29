@@ -4,13 +4,13 @@ import { Helper } from "components/Helper";
 import React from "react";
 import { UserData } from "pages/_app";
 const Home = () => {
-  const { state, dispatch } = useContext(UserData);
+  const { data, dispatch } = useContext(UserData);
   const [mode, setMode] = useState("MENU");
-  console.log("state:", state);
+  console.log("data:", data);
 
   return (
     <Layout>
-      <Helper mode={mode} data={state.data} />
+      <Helper mode={mode} data={data} />
     </Layout>
   );
 };
