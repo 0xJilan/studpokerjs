@@ -50,7 +50,12 @@ export const Logo = () => {
   return (
     <LogoWrapper>
       <ImgWrapper>
-        <Image src={LogoCards} height="100%" width="100%" />
+        <Image
+          src={LogoCards}
+          height="100%"
+          width="100%"
+          style={{ boxShadow: "5px 5px 15px 5px #000000" }}
+        />
       </ImgWrapper>
       <BigTitle>STUDPOKER.JS</BigTitle>
       <VersionWrapper>

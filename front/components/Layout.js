@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { orange, GradientDark } from "styles/color";
+import { orange, GradientDark } from "styles/colors";
 import Head from "next/head";
 import { Logo } from "components/Logo";
 
