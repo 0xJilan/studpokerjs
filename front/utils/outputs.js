@@ -1,5 +1,3 @@
-import { getDatas } from "lib/handleLocalStorage";
-
 export const OUTPUTS_RULES = [
   "GOAL: GET A 5 CARDS POKER HAND HIGHER THAN BANK",
   "BEFORE CARDS BEING DEALT YOU NEEDS TO WAGER (ANTE)",

@@ -5,6 +5,7 @@ import {
   OUTPUTS_PAYOUTS,
   OUTPUTS_COMMANDS,
 } from "utils/outputs";
+import { formatData } from "lib/formatData";
 
 const HelperSection = styled.section`
   width: 100%;
@@ -22,6 +23,7 @@ const DoubleBox = styled.div`
 const HelperWrapper = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: center;
   color: ${(props) => props.color};
   height: ${(props) => props.height}%;
   width: ${(props) => props.width}%;
@@ -40,14 +42,14 @@ const OutputTitle = styled.span`
   margin-bottom: 0.2rem;
 `;
 
-const HelperComponent = ({ title, height, width, outputs, color }) => {
+const HelperComponent = ({ title, height, width, outputs, color, type }) => {
   return (
     <HelperWrapper color={color} height={height} width={width}>
       <HelperTitle>{title}</HelperTitle>
       <OutputWrapper>
         {outputs.map((item, key) => (
           <OutputTitle color={color} key={key}>
-            - {item}
+            - {type === "datas" ? item[0] + " : " + item[1] : item}
           </OutputTitle>
         ))}
       </OutputWrapper>
@@ -55,7 +57,7 @@ const HelperComponent = ({ title, height, width, outputs, color }) => {
   );
 };
 
-export const Helper = ({ mode }) => {
+export const Helper = ({ mode, data }) => {
   return (
     <HelperSection>
       <HelperComponent
@@ -74,11 +76,12 @@ export const Helper = ({ mode }) => {
           outputs={OUTPUTS_COMMANDS[mode]}
         />
         <HelperComponent
-          title="AVAILAIBLE COMMANDS"
+          title="STATS"
           height="50"
           width="100"
           color={orange}
-          outputs={OUTPUTS_COMMANDS[mode]}
+          type="datas"
+          outputs={formatData(data[0])}
         />
       </DoubleBox>
       <HelperComponent

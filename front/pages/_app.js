@@ -1,7 +1,26 @@
-import '../styles/globals.css'
+import "../styles/globals.css";
+import React, { createContext, useReducer } from "react";
 
-function MyApp({ Component, pageProps }) {
-  return <Component {...pageProps} />
-}
+export const UserData = createContext();
 
-export default MyApp
+const initailState = {
+  data: [
+    {
+      hands: 0,
+      wallet: 0,
+      wins: 0,
+      looses: 0,
+    },
+  ],
+};
+const MyApp = ({ Component, pageProps }) => {
+  const Reducers = () => {};
+  const [state, dispatch] = useReducer(Reducers, initailState);
+
+  return (
+    <UserData.Provider value={{ state, dispatch }}>
+      <Component {...pageProps} />
+    </UserData.Provider>
+  );
+};
+export default MyApp;
