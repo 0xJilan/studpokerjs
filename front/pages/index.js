@@ -4,6 +4,7 @@ import { Layout } from "components/Layout";
 import { Helper } from "components/Helper";
 import { History } from "components/History";
 import { Input } from "components/Input";
+import { Output } from "components/Input";
 
 const Home = () => {
   const { data, dispatch } = useContext(UserData);
@@ -14,28 +15,34 @@ const Home = () => {
   const handleKeyPress = useCallback(
     (event) => {
       if (event.key === "Enter") {
-        console.log(command);
         switch (command) {
           case "FAUCET":
-            console.log("faucet");
+            dispatch({ type: "GET_FAUCET" });
+            setCommandHistory((data) => [
+              ...data,
+              { host: false, message: command },
+              { host: true, message: "Send 1000$!" },
+            ]);
             setCommand("");
             break;
           case "PLAY":
             console.log("play");
             setCommand("");
-
             break;
           case "DEMO":
             console.log("demo");
             setCommand("");
             break;
           case "CLEAR":
-            console.log("clear");
+            setCommandHistory([]);
             setCommand("");
-
             break;
           default:
-            console.log("command not found!");
+            setCommandHistory((data) => [
+              ...data,
+              { host: false, message: command },
+              { host: true, message: "command not found!" },
+            ]);
             setCommand("");
         }
       }
