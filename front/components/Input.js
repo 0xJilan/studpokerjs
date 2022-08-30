@@ -1,14 +1,11 @@
 import { useEffect, useRef } from "react";
 import styled from "styled-components";
 import { Blink } from "components/Animations";
-import { orange, green, grey, purple } from "styles/colors";
+import { orange, green, white, purple } from "styles/colors";
 
 const Text = styled.span`
-  font-size: 0.6rem;
-  color: ${grey};
-  @media (min-width: 768px) {
-    font-size: 0.8rem;
-  }
+  font-size: 0.8rem;
+  color: ${white};
   @media (min-width: 1180) {
     font-size: 1rem;
   }
@@ -31,10 +28,11 @@ const InputWrapper = styled.div`
 
 const GuestInput = styled(Text).attrs({ as: "input" })`
   border: none;
+  font-family: "Bungee-Regular";
   background-color: transparent;
   resize: none;
   outline: none;
-  border-left: 1px solid transparent;
+  border-left: 2px solid transparent;
   animation: ${Blink} 1.5s cubic-bezier(0.215, 0.61, 0.355, 1) forwards infinite;
   &:focus {
     animation: none;
