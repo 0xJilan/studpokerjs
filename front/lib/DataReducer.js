@@ -5,6 +5,7 @@ export const DataReducer = (data, action) => {
         ...data,
         wallet: data.wallet + 1000,
       };
+
     default:
       return data;
   }

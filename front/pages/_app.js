@@ -3,7 +3,6 @@ import React, { createContext, useReducer } from "react";
 import { DataReducer } from "lib/DataReducer";
 
 export const UserData = createContext();
-
 const initialData = {
   hands: 0,
   wallet: 0,

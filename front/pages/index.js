@@ -1,20 +1,28 @@
 import { useState, useContext } from "react";
+import { UserData } from "pages/_app";
 import { Layout } from "components/Layout";
 import { Helper } from "components/Helper";
-import React from "react";
-import { UserData } from "pages/_app";
+import { History } from "components/History";
+import { Input } from "components/Input";
+
 const Home = () => {
   const { data, dispatch } = useContext(UserData);
   const [mode, setMode] = useState("MENU");
-  console.log("data:", data);
+  const [command, setCommand] = useState(null);
+  const [commandHistory, setCommandHistory] = useState([]);
 
-  const addToCart = () => {
+  const getFaucet = () => {
     dispatch({ type: "GET_FAUCET" });
   };
+
   return (
     <Layout>
       <Helper mode={mode} data={data} />
-      <div onClick={() => addToCart()}>GETFAUCET</div>
+      <History commandHistory={commandHistory} />
+      <Input command={command} setCommand={setCommand} />
+      {/*
+        <div onClick={() => getFaucet()}>GETFAUCET</div>
+      */}
     </Layout>
   );
 };
