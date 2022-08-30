@@ -1,22 +1,30 @@
 import "styles/globals.css";
 import React, { createContext, useReducer } from "react";
-import { DataReducer } from "lib/DataReducer";
+import { StatsReducer } from "lib/StatsReducer";
+import { HistoryReducer } from "lib/HistoryReducer";
 
-export const UserData = createContext();
-const initialData = {
+export const UserStats = createContext();
+export const UserHistory = createContext();
+
+const Stats = {
   hands: 0,
   wallet: 0,
   wins: 0,
   looses: 0,
+  Ante: 100,
 };
+const History = [{ host: true, message: "Welcome Fren!" }];
 
 const MyApp = ({ Component, pageProps }) => {
-  const [data, dispatch] = useReducer(DataReducer, initialData);
+  const [stats, dispatchStats] = useReducer(StatsReducer, Stats);
+  const [history, dispatchHistory] = useReducer(HistoryReducer, History);
 
   return (
-    <UserData.Provider value={{ data, dispatch }}>
-      <Component {...pageProps} />
-    </UserData.Provider>
+    <UserStats.Provider value={{ stats, dispatchStats }}>
+      <UserHistory.Provider value={{ history, dispatchHistory }}>
+        <Component {...pageProps} />
+      </UserHistory.Provider>
+    </UserStats.Provider>
   );
 };
 export default MyApp;
