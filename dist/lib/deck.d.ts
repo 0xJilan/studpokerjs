@@ -28,3 +28,4 @@ export declare const distributeDeck: (shuffledDeck: string[]) => string[][];
 export declare const splitBySuitsAndValues: (deck: string[]) => Deck;
 export declare const excludeCardsFromDeck: (deckShuffled: string[], excludedCards: string[]) => string[];
 export declare const getRandomCardsShuffledFromDeck: (numberOfCards: number, excludedCards?: string[]) => string[];
+export declare const getReadableCards: (cards: string[]) => string[];
