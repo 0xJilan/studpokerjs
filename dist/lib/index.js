@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.resolveGame = exports.resolveHand = exports.getPoints = exports.splitBySuitsAndValues = exports.distributeDeck = exports.shuffleDeck = exports.generateDeck = exports.getWinner = exports.isQualified = exports.getHandName = exports.isRoyalFlush = exports.isStraightFlush = exports.isFlush = exports.isStraight = exports.isFourOfKind = exports.isFull = exports.isThreeOfKind = exports.isTwoPairs = exports.isOnePair = exports.getDuplicates = exports.isAceKing = void 0;
+exports.resolveGame = exports.resolveHand = exports.getPoints = exports.getRandomCardsShuffledFromDeck = exports.excludeCardsFromDeck = exports.splitBySuitsAndValues = exports.distributeDeck = exports.shuffleDeck = exports.generateDeck = exports.getWinner = exports.isQualified = exports.getHandName = exports.isRoyalFlush = exports.isStraightFlush = exports.isFlush = exports.isStraight = exports.isFourOfKind = exports.isFull = exports.isThreeOfKind = exports.isTwoPairs = exports.isOnePair = exports.getDuplicates = exports.isAceKing = void 0;
 var checker_1 = require("./checker");
 Object.defineProperty(exports, "isAceKing", { enumerable: true, get: function () { return checker_1.isAceKing; } });
 Object.defineProperty(exports, "getDuplicates", { enumerable: true, get: function () { return checker_1.getDuplicates; } });
@@ -21,6 +21,8 @@ Object.defineProperty(exports, "generateDeck", { enumerable: true, get: function
 Object.defineProperty(exports, "shuffleDeck", { enumerable: true, get: function () { return deck_1.shuffleDeck; } });
 Object.defineProperty(exports, "distributeDeck", { enumerable: true, get: function () { return deck_1.distributeDeck; } });
 Object.defineProperty(exports, "splitBySuitsAndValues", { enumerable: true, get: function () { return deck_1.splitBySuitsAndValues; } });
+Object.defineProperty(exports, "excludeCardsFromDeck", { enumerable: true, get: function () { return deck_1.excludeCardsFromDeck; } });
+Object.defineProperty(exports, "getRandomCardsShuffledFromDeck", { enumerable: true, get: function () { return deck_1.getRandomCardsShuffledFromDeck; } });
 var resolver_1 = require("./resolver");
 Object.defineProperty(exports, "getPoints", { enumerable: true, get: function () { return resolver_1.getPoints; } });
 Object.defineProperty(exports, "resolveHand", { enumerable: true, get: function () { return resolver_1.resolveHand; } });

@@ -19,5 +19,7 @@ export {
   shuffleDeck,
   distributeDeck,
   splitBySuitsAndValues,
+  excludeCardsFromDeck,
+  getRandomCardsShuffledFromDeck,
 } from "./deck";
 export { getPoints, resolveHand, resolveGame } from "./resolver";

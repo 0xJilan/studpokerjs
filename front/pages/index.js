@@ -5,6 +5,7 @@ import { Helper } from "components/Helper";
 import { History } from "components/History";
 import { Input } from "components/Input";
 import { isAvailableCommand } from "lib/Checker";
+import { getRandomCardsShuffledFromDeck } from "studpokerjs";
 
 const Home = () => {
   const { stats, dispatchStats } = useContext(UserStats);
