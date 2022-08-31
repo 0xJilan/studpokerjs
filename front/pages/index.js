@@ -24,12 +24,14 @@ const Home = () => {
               break;
             case "PLAY":
               setMode("PLAY");
-              console.log("play");
               dispatchHistory({ type: "PLAY", command });
               setCommand("");
               break;
             case "DEAL":
               setMode("DEAL");
+              //TODO: give 6 cards for the start game
+              //TODO: explain Bet or fold like on play
+              //TODO: dispatch stats and history
               setCommand("");
               break;
             case "EXIT":
@@ -49,12 +51,10 @@ const Home = () => {
               setCommand("");
               break;
             default:
-              console.log("default switch");
               dispatchHistory({ type: "NOT_FOUND", command });
               setCommand("");
           }
         } else {
-          console.log("else condition");
           dispatchHistory({ type: "NOT_FOUND", command });
           setCommand("");
         }

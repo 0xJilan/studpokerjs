@@ -7,6 +7,7 @@ const HistoryWrapper = styled.div`
   flex-direction: column;
   margin: 1rem 0;
 `;
+//TODO: History must be auto scrolled down when many elements inside
 export const History = ({ commandHistory }) => {
   return (
     <HistoryWrapper>
