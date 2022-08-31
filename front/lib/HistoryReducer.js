@@ -1,11 +1,21 @@
+import { OUTPUTS_ERRORS } from "utils/outputs";
+
 export const HistoryReducer = (history, action) => {
   switch (action.type) {
     case "GET_FAUCET":
+      const message =
+        action.error === true
+          ? OUTPUTS_ERRORS[action.command].funded
+          : "Send 1000$!";
       return [
         ...history,
         { host: false, message: action.command },
-        { host: true, message: "Send 1000$!" },
+        {
+          host: true,
+          message: message,
+        },
       ];
+
     case "CLEAR":
       return [];
     case "PLAY":

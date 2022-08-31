@@ -6,6 +6,7 @@ import { History } from "components/History";
 import { Input } from "components/Input";
 import { isAvailableCommand } from "lib/Checker";
 import { getRandomCardsShuffledFromDeck } from "studpokerjs";
+import { OUTPUTS_ERRORS } from "utils/outputs";
 
 const Home = () => {
   const { stats, dispatchStats } = useContext(UserStats);
@@ -13,22 +14,15 @@ const Home = () => {
   const [mode, setMode] = useState("MENU");
   const [command, setCommand] = useState("");
 
-  const getFirstRoundCards = getRandomCardsShuffledFromDeck(6);
-  console.log("getFirstRoundCards :", getFirstRoundCards);
-  const getSecondRoundCards = getRandomCardsShuffledFromDeck(
-    4,
-    getFirstRoundCards
-  );
-  console.log("getSecondRoundCards:", getSecondRoundCards);
-
   const handleKeyPress = useCallback(
     (event) => {
       if (event.key === "Enter") {
         if (isAvailableCommand(mode, command)) {
           switch (command) {
             case "FAUCET":
-              dispatchStats({ type: "GET_FAUCET" });
-              dispatchHistory({ type: "GET_FAUCET", command });
+              const error = stats.wallet >= 1000;
+              !error && dispatchStats({ type: "GET_FAUCET" });
+              dispatchHistory({ type: "GET_FAUCET", command, error });
               setCommand("");
               break;
             case "PLAY":

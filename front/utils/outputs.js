@@ -27,3 +27,12 @@ export const OUTPUTS_COMMANDS = {
   PLAY: ["DEAL", "EXIT", "CLEAR"],
   DEAL: ["BET", "FOLD", "CLEAR"],
 };
+
+export const OUTPUTS_ERRORS = {
+  FAUCET: {
+    funded: "NO! YOU HAVE ENOUGH TO GAMBLE FREN..",
+  },
+  PLAY: {
+    fund: "TO PLAY YOU NEED MINIMUM 3 ANTE. PLEASE USE 'FAUCET' COMMAND",
+  },
+};
