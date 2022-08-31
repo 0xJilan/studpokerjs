@@ -21,5 +21,6 @@ export {
   splitBySuitsAndValues,
   excludeCardsFromDeck,
   getRandomCardsShuffledFromDeck,
+  getReadableCards,
 } from "./deck";
 export { getPoints, resolveHand, resolveGame } from "./resolver";

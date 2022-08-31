@@ -3,8 +3,8 @@ import { OUTPUTS_RESPONSES } from "utils/outputs";
 export const HistoryReducer = (history, action) => {
   const message =
     action.error === true
-      ? OUTPUTS_RESPONSES[action.command].error
-      : OUTPUTS_RESPONSES[action.command].succes;
+      ? OUTPUTS_RESPONSES[action.command]?.error
+      : OUTPUTS_RESPONSES[action.command]?.succes;
 
   switch (action.type) {
     case "GET_FAUCET":
@@ -24,6 +24,15 @@ export const HistoryReducer = (history, action) => {
         { host: false, message: action.command },
         { host: true, message },
       ];
+
+    case "DEAL":
+      return [
+        ...history,
+        { host: false, message: action.command },
+        { host: true, message: `YOUR CARDS: ${action.userHand}` },
+        { host: true, message: `BANK CARD: ${action.bankHand}` },
+      ];
+
     case "NOT_FOUND":
       return [
         ...history,

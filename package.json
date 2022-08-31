@@ -1,6 +1,6 @@
 {
   "name": "studpokerjs",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "TS/JS Library who help to play Caribbean Poker against IA",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

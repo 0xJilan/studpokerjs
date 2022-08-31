@@ -1,5 +1,5 @@
 import { useState, useContext, useEffect, useCallback } from "react";
-import { UserStats, UserHistory } from "pages/_app";
+import { UserStats, UserHistory, UserParty } from "pages/_app";
 import { Layout } from "components/Layout";
 import { Helper } from "components/Helper";
 import { History } from "components/History";
@@ -10,6 +10,8 @@ import { getRandomCardsShuffledFromDeck } from "studpokerjs";
 const Home = () => {
   const { stats, dispatchStats } = useContext(UserStats);
   const { history, dispatchHistory } = useContext(UserHistory);
+  const { party, dispatchParty } = useContext(UserParty);
+
   const [mode, setMode] = useState("MENU");
   const [command, setCommand] = useState("");
 
@@ -38,7 +40,20 @@ const Home = () => {
               break;
             case "DEAL":
               setMode("DEAL");
-              //TODO: give 6 cards for the start game
+              const getSixCards = getRandomCardsShuffledFromDeck(6);
+              const userHand = getSixCards.slice(0, 5);
+              const bankHand = getSixCards.slice(5, 6);
+
+              dispatchParty({ type: command, userHand, bankHand });
+              console.log("userHand:", userHand);
+              console.log("bankHand:", bankHand);
+              dispatchHistory({
+                type: command,
+                command,
+                userHand,
+                bankHand,
+              });
+              //TODO: display user and bank hand
               //TODO: explain Bet or fold like on play
               //TODO: dispatch stats and history
               setCommand("");
@@ -69,7 +84,7 @@ const Home = () => {
         }
       }
     },
-    [command, mode]
+    [command, mode, party]
   );
 
   useEffect(() => {
@@ -77,7 +92,7 @@ const Home = () => {
     return () => {
       window.removeEventListener("keydown", handleKeyPress);
     };
-  }, [command, mode]);
+  }, [command, mode, party]);
 
   return (
     <Layout>

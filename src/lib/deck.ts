@@ -2,6 +2,7 @@ import { Deck } from "./utils";
 
 const suits: string[] = ["H", "C", "D", "S"];
 const values: number[] = [...Array(13)].map((_, index) => index + 2);
+const readableSuits: any = { C: "♣", D: "♦", H: "♥", S: "♠" };
 
 /**
  * Build a 52 cards deck from suits and values
@@ -64,4 +65,23 @@ export const getRandomCardsShuffledFromDeck = (
       ? shuffledDeck
       : excludeCardsFromDeck(shuffledDeck, excludedCards);
   return randomDeck.slice(0, numberOfCards);
+};
+
+//TODO: MAKE COMMENT AND TEST
+export const getReadableCards = (cards: string[]): string[] => {
+  return cards.map((card) => {
+    const value = card.split("-")[0];
+    const suit = card.split("-")[1];
+    const readableValue =
+      value === "11"
+        ? "J"
+        : value === "12"
+        ? "Q"
+        : value === "13"
+        ? "K"
+        : value === "14"
+        ? "A"
+        : value;
+    return readableValue + readableSuits[suit];
+  });
 };
