@@ -23,7 +23,7 @@ export const OUTPUTS_PAYOUTS = [
 ];
 
 export const OUTPUTS_COMMANDS = {
-  MENU: ["FAUCET", "PLAY", "CLEAR", "DEMO"],
-  PLAY: ["DEAL", "EXIT"],
-  DEAL: ["BET", "FOLD"],
+  MENU: ["FAUCET", "PLAY", "DEMO", "CLEAR"],
+  PLAY: ["DEAL", "EXIT", "CLEAR"],
+  DEAL: ["BET", "FOLD", "CLEAR"],
 };

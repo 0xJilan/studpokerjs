@@ -4,6 +4,7 @@ import { Layout } from "components/Layout";
 import { Helper } from "components/Helper";
 import { History } from "components/History";
 import { Input } from "components/Input";
+import { isAvailableCommand } from "lib/Checker";
 
 const Home = () => {
   const { stats, dispatchStats } = useContext(UserStats);
@@ -14,41 +15,48 @@ const Home = () => {
   const handleKeyPress = useCallback(
     (event) => {
       if (event.key === "Enter") {
-        switch (command) {
-          case "FAUCET":
-            dispatchStats({ type: "GET_FAUCET" });
-            dispatchHistory({ type: "GET_FAUCET", command });
-            setCommand("");
-            break;
-          case "PLAY":
-            setMode("PLAY");
-            //TODO: FIX WHY PLAY DONT DISPATCH HISTORY
-            dispatchHistory({ type: "PLAY", command });
-            setCommand("");
-            break;
-          case "DEAL":
-            setMode("DEAL");
-            setCommand("");
-            break;
-          case "EXIT":
-            setMode("MENU");
-            setCommand("");
-            break;
-          case "FOLD":
-            setMode("PLAY");
-            setCommand("");
-            break;
-          case "DEMO":
-            console.log("demo");
-            setCommand("");
-            break;
-          case "CLEAR":
-            dispatchHistory({ type: "CLEAR" });
-            setCommand("");
-            break;
-          default:
-            dispatchHistory({ type: "NOT_FOUND", command });
-            setCommand("");
+        if (isAvailableCommand(mode, command)) {
+          switch (command) {
+            case "FAUCET":
+              dispatchStats({ type: "GET_FAUCET" });
+              dispatchHistory({ type: "GET_FAUCET", command });
+              setCommand("");
+              break;
+            case "PLAY":
+              setMode("PLAY");
+              console.log("play");
+              dispatchHistory({ type: "PLAY", command });
+              setCommand("");
+              break;
+            case "DEAL":
+              setMode("DEAL");
+              setCommand("");
+              break;
+            case "EXIT":
+              setMode("MENU");
+              setCommand("");
+              break;
+            case "FOLD":
+              setMode("PLAY");
+              setCommand("");
+              break;
+            case "DEMO":
+              console.log("demo");
+              setCommand("");
+              break;
+            case "CLEAR":
+              dispatchHistory({ type: "CLEAR" });
+              setCommand("");
+              break;
+            default:
+              console.log("default switch");
+              dispatchHistory({ type: "NOT_FOUND", command });
+              setCommand("");
+          }
+        } else {
+          console.log("else condition");
+          dispatchHistory({ type: "NOT_FOUND", command });
+          setCommand("");
         }
       }
     },
@@ -67,9 +75,6 @@ const Home = () => {
       <Helper mode={mode} data={stats} />
       <History commandHistory={history} />
       <Input command={command} setCommand={setCommand} />
-      {/*
-        <div onClick={() => getFaucet()}>GETFAUCET</div>
-      */}
     </Layout>
   );
 };
