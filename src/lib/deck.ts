@@ -44,3 +44,24 @@ export const splitBySuitsAndValues = (deck: string[]): Deck => {
     values: deck.map((card) => Number(card.split("-")[0])),
   };
 };
+
+//TODO: MAKE COMMENT AND TEST
+export const excludeCardsFromDeck = (
+  deckShuffled: string[],
+  excludedCards: string[]
+): string[] => {
+  return deckShuffled.filter((card) => !excludedCards.includes(card));
+};
+//TODO: MAKE COMMENT AND TEST
+export const getRandomCardsShuffledFromDeck = (
+  numberOfCards: number,
+  excludedCards: string[] = []
+): string[] => {
+  const deck = generateDeck();
+  const shuffledDeck = shuffleDeck(deck);
+  const randomDeck =
+    excludedCards.length === 0
+      ? shuffledDeck
+      : excludeCardsFromDeck(shuffledDeck, excludedCards);
+  return randomDeck.slice(0, numberOfCards);
+};

@@ -12,6 +12,14 @@ const Home = () => {
   const [mode, setMode] = useState("MENU");
   const [command, setCommand] = useState("");
 
+  const getFirstRoundCards = getRandomCardsShuffledFromDeck(6);
+  console.log("getFirstRoundCards :", getFirstRoundCards);
+  const getSecondRoundCards = getRandomCardsShuffledFromDeck(
+    4,
+    getFirstRoundCards
+  );
+  console.log("getSecondRoundCards:", getSecondRoundCards);
+
   const handleKeyPress = useCallback(
     (event) => {
       if (event.key === "Enter") {
