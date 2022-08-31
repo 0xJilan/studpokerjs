@@ -1,28 +1,28 @@
-import { OUTPUTS_ERRORS } from "utils/outputs";
+import { OUTPUTS_RESPONSES } from "utils/outputs";
 
 export const HistoryReducer = (history, action) => {
+  const message =
+    action.error === true
+      ? OUTPUTS_RESPONSES[action.command].error
+      : OUTPUTS_RESPONSES[action.command].succes;
+
   switch (action.type) {
     case "GET_FAUCET":
-      const message =
-        action.error === true
-          ? OUTPUTS_ERRORS[action.command].funded
-          : "Send 1000$!";
       return [
         ...history,
         { host: false, message: action.command },
         {
           host: true,
-          message: message,
+          message,
         },
       ];
-
     case "CLEAR":
       return [];
     case "PLAY":
       return [
         ...history,
         { host: false, message: action.command },
-        { host: true, message: "Enter 'DEAL' to receive cards!" },
+        { host: true, message },
       ];
     case "NOT_FOUND":
       return [

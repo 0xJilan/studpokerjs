@@ -36,3 +36,14 @@ export const OUTPUTS_ERRORS = {
     fund: "TO PLAY YOU NEED MINIMUM 3 ANTE. PLEASE USE 'FAUCET' COMMAND",
   },
 };
+
+export const OUTPUTS_RESPONSES = {
+  FAUCET: {
+    error: "NO! YOU HAVE ENOUGH TO GAMBLE FREN..",
+    succes: "SEND 1000$!",
+  },
+  PLAY: {
+    error: "TO PLAY YOU NEED MINIMUM 3 ANTE. PLEASE USE 'FAUCET' COMMAND",
+    succes: "ENTER 'DEAL' TO RECEIVE CARDS. Cost: 1 ANTE",
+  },
+};

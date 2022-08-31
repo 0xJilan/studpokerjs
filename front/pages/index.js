@@ -6,7 +6,6 @@ import { History } from "components/History";
 import { Input } from "components/Input";
 import { isAvailableCommand } from "lib/Checker";
 import { getRandomCardsShuffledFromDeck } from "studpokerjs";
-import { OUTPUTS_ERRORS } from "utils/outputs";
 
 const Home = () => {
   const { stats, dispatchStats } = useContext(UserStats);
@@ -20,14 +19,21 @@ const Home = () => {
         if (isAvailableCommand(mode, command)) {
           switch (command) {
             case "FAUCET":
-              const error = stats.wallet >= 1000;
-              !error && dispatchStats({ type: "GET_FAUCET" });
-              dispatchHistory({ type: "GET_FAUCET", command, error });
+              stats.wallet < 1000 && dispatchStats({ type: "GET_FAUCET" });
+              dispatchHistory({
+                type: "GET_FAUCET",
+                command,
+                error: stats.wallet >= 1000,
+              });
               setCommand("");
               break;
             case "PLAY":
-              setMode("PLAY");
-              dispatchHistory({ type: "PLAY", command });
+              stats.wallet >= 300 && setMode("PLAY");
+              dispatchHistory({
+                type: "PLAY",
+                command,
+                error: stats.wallet < 300,
+              });
               setCommand("");
               break;
             case "DEAL":

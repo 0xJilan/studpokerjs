@@ -5,7 +5,7 @@ const InputWrapper = styled.div`
   display: flex;
   flex-direction: row;
   align-items: baseline;
-  margin-right: 0.2rem;
+  margin: 0.2rem 0.2rem 0.2rem 0;
 `;
 
 export const Output = ({ host, command }) => {
