@@ -26,3 +26,5 @@ export declare const distributeDeck: (shuffledDeck: string[]) => string[][];
  * @exemple splitBySuitsAndValues([3-D, 9-H, 3-S, 10-H, 4-C]) => {suits: ['D', 'H', 'S', 'H', 'C' ],values: [ 3, 9, 3, 10, 4 ]}
  */
 export declare const splitBySuitsAndValues: (deck: string[]) => Deck;
+export declare const excludeCardsFromDeck: (deckShuffled: string[], excludedCards: string[]) => string[];
+export declare const getRandomCardsShuffledFromDeck: (numberOfCards: number, excludedCards?: string[]) => string[];

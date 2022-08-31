@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.splitBySuitsAndValues = exports.distributeDeck = exports.shuffleDeck = exports.generateDeck = void 0;
+exports.getRandomCardsShuffledFromDeck = exports.excludeCardsFromDeck = exports.splitBySuitsAndValues = exports.distributeDeck = exports.shuffleDeck = exports.generateDeck = void 0;
 const suits = ["H", "C", "D", "S"];
 const values = [...Array(13)].map((_, index) => index + 2);
 /**
@@ -44,4 +44,19 @@ const splitBySuitsAndValues = (deck) => {
     };
 };
 exports.splitBySuitsAndValues = splitBySuitsAndValues;
+//TODO: MAKE COMMENT AND TEST
+const excludeCardsFromDeck = (deckShuffled, excludedCards) => {
+    return deckShuffled.filter((card) => !excludedCards.includes(card));
+};
+exports.excludeCardsFromDeck = excludeCardsFromDeck;
+//TODO: MAKE COMMENT AND TEST
+const getRandomCardsShuffledFromDeck = (numberOfCards, excludedCards = []) => {
+    const deck = (0, exports.generateDeck)();
+    const shuffledDeck = (0, exports.shuffleDeck)(deck);
+    const randomDeck = excludedCards.length === 0
+        ? shuffledDeck
+        : (0, exports.excludeCardsFromDeck)(shuffledDeck, excludedCards);
+    return randomDeck.slice(0, numberOfCards);
+};
+exports.getRandomCardsShuffledFromDeck = getRandomCardsShuffledFromDeck;
 //# sourceMappingURL=deck.js.map
