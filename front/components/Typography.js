@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { Blink } from "components/Animations";
-import { orange, green, white, purple } from "styles/colors";
+import { orange, GreenCandle, RedCandle, white } from "styles/colors";
 
 export const Text = styled.span`
   font-size: 0.8rem;
@@ -10,10 +10,10 @@ export const Text = styled.span`
   }
 `;
 export const Fren = styled(Text)`
-  color: ${green};
+  color: ${GreenCandle};
 `;
 export const Location = styled(Text)`
-  color: ${purple};
+  color: ${RedCandle};
 `;
 export const Sign = styled(Text)`
   color: ${orange};

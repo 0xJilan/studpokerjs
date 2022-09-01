@@ -1,5 +1,12 @@
 import styled from "styled-components";
-import { orange, green, red, purple } from "styles/colors";
+import {
+  orange,
+  green,
+  red,
+  purple,
+  GreenCandle,
+  RedCandle,
+} from "styles/colors";
 import {
   OUTPUTS_RULES,
   OUTPUTS_PAYOUTS,
@@ -64,7 +71,7 @@ export const Helper = ({ mode, data }) => {
         title="RULES"
         height="100"
         width="30"
-        color={green}
+        color={GreenCandle}
         outputs={OUTPUTS_RULES}
       />
       <DoubleBox>
@@ -88,7 +95,7 @@ export const Helper = ({ mode, data }) => {
         title="PAYOUTS"
         width="30"
         height="100"
-        color={red}
+        color={RedCandle}
         outputs={OUTPUTS_PAYOUTS}
       />
     </HelperSection>

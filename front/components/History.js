@@ -20,7 +20,7 @@ const CardsWrapper = styled.div`
 
 const Card = styled.img`
   height: 110px;
-  width: 90px;
+  width: 75px;
 `;
 
 //TODO: History must be auto scrolled down when many elements inside

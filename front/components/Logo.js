@@ -1,13 +1,12 @@
 import styled from "styled-components";
-import Image from "next/image";
-import LogoCards from "public/logo.png";
 import PackageJSON from "package.json";
+import { orange } from "styles/colors";
 
 const LogoWrapper = styled.div`
   width: 100%;
   display: flex;
-  flex-direction: column;
-
+  flex-direction: row;
+  color: ${orange};
   height: 15%;
   justify-content: center;
   align-items: center;
@@ -16,9 +15,6 @@ const ElementWrapper = styled.div`
   display: flex;
   height: 3rem;
   width: 2.5rem;
-`;
-const ImgWrapper = styled(ElementWrapper)`
-  margin: 0 1rem;
 `;
 const VersionWrapper = styled(ElementWrapper)`
   margin: 0 1rem;
@@ -49,14 +45,6 @@ const Version = styled.p`
 export const Logo = () => {
   return (
     <LogoWrapper>
-      <ImgWrapper>
-        <Image
-          src={LogoCards}
-          height="100%"
-          width="100%"
-          style={{ boxShadow: "5px 5px 15px 5px #000000" }}
-        />
-      </ImgWrapper>
       <BigTitle>STUDPOKER.JS</BigTitle>
       <VersionWrapper>
         <Version>v {PackageJSON.version}</Version>

@@ -1,12 +1,12 @@
 import styled from "styled-components";
-import { orange, GradientDark } from "styles/colors";
+import { orange, GradientDark, DarkBlue } from "styles/colors";
 import Head from "next/head";
 import { Logo } from "components/Logo";
 
 const LayoutWrapper = styled.div`
   width: 100vw;
   height: 100vh;
-  background: ${GradientDark};
+  background: ${DarkBlue};
   padding: 0.5rem;
 `;
 const Main = styled.main`
