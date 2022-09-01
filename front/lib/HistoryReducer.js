@@ -26,11 +26,14 @@ export const HistoryReducer = (history, action) => {
       ];
 
     case "DEAL":
+      console.log("user cards in dispatch history :", action.userHand);
       return [
         ...history,
         { host: false, message: action.command },
-        { host: true, message: `YOUR CARDS: ${action.userHand}` },
-        { host: true, message: `BANK CARD: ${action.bankHand}` },
+        { host: true, message: "YOUR CARDS:" },
+        { host: true, cards: action.userHand },
+        { host: true, message: "BANK CARD:" },
+        { host: true, cards: action.bankHand },
       ];
 
     case "NOT_FOUND":

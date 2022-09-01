@@ -1788,10 +1788,10 @@
   "resolved" "https://registry.npmjs.org/strip-json-comments/-/strip-json-comments-3.1.1.tgz"
   "version" "3.1.1"
 
-"studpokerjs@^0.0.7":
-  "integrity" "sha512-tNVgCQCD+o5ng1UVnekeFDIUeQPGpCjg1T+i7KvRItCtaOS7M5wx46HMZUL3iEGEMLyfG9E4/2pQ81/QmV8dPA=="
-  "resolved" "https://registry.npmjs.org/studpokerjs/-/studpokerjs-0.0.7.tgz"
-  "version" "0.0.7"
+"studpokerjs@^0.0.8":
+  "integrity" "sha512-cd9PJUUghxQRwF5YKKqf3+3bgMjxRIJSa59gx6HqA+bAYa861Ny3twWkTMybaqntzwqpoahcIKJtfEIDWv5d1w=="
+  "resolved" "https://registry.npmjs.org/studpokerjs/-/studpokerjs-0.0.8.tgz"
+  "version" "0.0.8"
 
 "styled-components@^5.3.5", "styled-components@>= 2":
   "integrity" "sha512-ndETJ9RKaaL6q41B69WudeqLzOpY1A/ET/glXkNZ2T7dPjPqpPCXXQjDFYZWwNnE5co0wX+gTCqx9mfxTmSIPg=="
