@@ -73,6 +73,11 @@ const Home = () => {
               break;
             case "BET":
               console.log("BET");
+              // Get 4 Cards for the bank
+              // resolve hand of the bank
+              //compare two hands
+              // display bank hand resolved
+              // display result
               setCommand("");
               break;
             case "EXIT":
