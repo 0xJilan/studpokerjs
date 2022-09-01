@@ -4,14 +4,14 @@ import { Text } from "./Typography";
 const CardOutputWrapper = styled.div`
   display: flex;
   flex-direction: row;
-  width: 600px;
+  width: 70%;
   justify-content: space-between;
 `;
 const CardsWrapper = styled.div`
   display: flex;
   flex-direction: row;
   height: 100%;
-  width: 70%;
+  width: 50%;
   justify-content: space-between;
   margin: 1rem 0;
 `;
@@ -22,7 +22,8 @@ const Card = styled.img`
 const ResolverWrapper = styled.div`
   display: flex;
   height: 100%;
-  justify-content: center;
+  width: 50%;
+  justify-content: left;
   align-items: center;
 `;
 
