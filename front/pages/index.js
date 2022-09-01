@@ -47,13 +47,13 @@ const Home = () => {
               dispatchParty({ type: command, userHand, bankHand });
               console.log("userHand:", userHand);
               console.log("bankHand:", bankHand);
+              //TODO: ADD LOOK TO CARDS
               dispatchHistory({
                 type: command,
                 command,
                 userHand: getReadableCards(userHand),
                 bankHand: getReadableCards(bankHand),
               });
-              //TODO: display user and bank hand
               //TODO: explain Bet or fold like on play
               //TODO: dispatch stats and history
               setCommand("");
