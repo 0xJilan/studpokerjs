@@ -6,6 +6,12 @@ export const PartyReducer = (party, action) => {
         userHand: action.userHand,
         bankHand: action.bankHand,
       };
+    case "FOLD":
+      return {
+        ...party,
+        userHand: [],
+        bankHand: [],
+      };
     default:
       return party;
   }

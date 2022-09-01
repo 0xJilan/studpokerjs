@@ -22,19 +22,15 @@ const Card = styled.img`
 const ResolverWrapper = styled.div`
   display: flex;
   height: 100%;
-  width: 50%;
+  width: 30%;
   justify-content: left;
   align-items: center;
 `;
 
 export const CardsOutput = ({ cards, resolved }) => {
   const SUBJECT = resolved ? "YOUR HAND" : "BANK HAND";
-  console.log("cards:", cards);
   const SUBJECT_CARDS =
     cards.length > 1 ? cards : ["X", "X", "X", "X", cards[0]];
-
-  console.log("SUBJECTCARD:", SUBJECT_CARDS);
-
   return (
     <CardOutputWrapper>
       <CardsWrapper>

@@ -1,6 +1,6 @@
 export const StatsReducer = (stats, action) => {
   switch (action.type) {
-    case "GET_FAUCET":
+    case "FAUCET":
       return {
         ...stats,
         wallet: stats.wallet + 1000,
@@ -10,6 +10,11 @@ export const StatsReducer = (stats, action) => {
         ...stats,
         wallet: stats.wallet - 100,
         hands: stats.hands + 1,
+      };
+    case "FOLD":
+      return {
+        ...stats,
+        looses: stats.looses + 1,
       };
 
     default:

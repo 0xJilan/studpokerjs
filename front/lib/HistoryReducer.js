@@ -7,7 +7,7 @@ export const HistoryReducer = (history, action) => {
       : OUTPUTS_RESPONSES[action.command]?.succes;
 
   switch (action.type) {
-    case "GET_FAUCET":
+    case "FAUCET":
       return [
         ...history,
         { host: false, message: action.command },
@@ -24,9 +24,7 @@ export const HistoryReducer = (history, action) => {
         { host: false, message: action.command },
         { host: true, message },
       ];
-
     case "DEAL":
-      console.log("bank cards in dispatch history :", action.bankHand);
       const { command, user, bank } = action;
       return [
         ...history,
@@ -35,11 +33,15 @@ export const HistoryReducer = (history, action) => {
         { host: true, cards: bank.hand },
         {
           host: true,
-          message:
-            "IF YOU THINK YOUR HAND WILL WIN ?  ENTER 'BET' TO CONTINUE (COST: 2 ANTE) OR 'FOLD' AND LOSE YOUR ANTE",
+          message,
         },
       ];
-
+    case "FOLD":
+      return [
+        ...history,
+        { host: false, message: action.command },
+        { host: true, message },
+      ];
     case "NOT_FOUND":
       return [
         ...history,

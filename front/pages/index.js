@@ -24,9 +24,9 @@ const Home = () => {
         if (isAvailableCommand(mode, command)) {
           switch (command) {
             case "FAUCET":
-              stats.wallet < 1000 && dispatchStats({ type: "GET_FAUCET" });
+              stats.wallet < 1000 && dispatchStats({ type: command });
               dispatchHistory({
-                type: "GET_FAUCET",
+                type: command,
                 command,
                 error: stats.wallet >= 1000,
               });
@@ -35,7 +35,7 @@ const Home = () => {
             case "PLAY":
               stats.wallet >= 300 && setMode("PLAY");
               dispatchHistory({
-                type: "PLAY",
+                type: command,
                 command,
                 error: stats.wallet < 300,
               });
@@ -46,10 +46,8 @@ const Home = () => {
               const getSixCards = getRandomCardsShuffledFromDeck(6);
               const userHand = getSixCards.slice(0, 5);
               const bankHand = getSixCards.slice(5, 6);
-              dispatchStats({ type: "DEAL" });
+              dispatchStats({ type: command });
               dispatchParty({ type: command, userHand, bankHand });
-              console.log("userHand:", userHand);
-              console.log("bankHand:", bankHand);
               dispatchHistory({
                 type: command,
                 command,
@@ -61,20 +59,28 @@ const Home = () => {
                   hand: getReadableCards(bankHand),
                 },
               });
-              //TODO: explain Bet or fold like on play
-              //TODO: dispatch stats and history
+              setCommand("");
+              break;
+            case "FOLD":
+              dispatchStats({ type: command });
+              dispatchParty({ type: command });
+              dispatchHistory({
+                type: command,
+                command,
+              });
+              setMode("PLAY");
+              setCommand("");
+              break;
+            case "BET":
+              console.log("BET");
               setCommand("");
               break;
             case "EXIT":
               setMode("MENU");
               setCommand("");
               break;
-            case "FOLD":
-              setMode("PLAY");
-              setCommand("");
-              break;
             case "DEMO":
-              console.log("demo");
+              console.log("DEMO");
               setCommand("");
               break;
             case "CLEAR":
