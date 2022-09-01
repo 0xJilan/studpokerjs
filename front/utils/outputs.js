@@ -44,6 +44,6 @@ export const OUTPUTS_RESPONSES = {
   },
   PLAY: {
     error: "TO PLAY YOU NEED MINIMUM 3 ANTE. PLEASE USE 'FAUCET' COMMAND",
-    succes: "ENTER 'DEAL' TO RECEIVE CARDS. Cost: 1 ANTE",
+    succes: "ENTER 'DEAL' TO RECEIVE CARDS. COST: 1 ANTE",
   },
 };
