@@ -1,4 +1,5 @@
 import { useState, useContext, useEffect, useCallback } from "react";
+import styled from "styled-components";
 import { UserStats, UserHistory, UserParty } from "pages/_app";
 import { Layout } from "components/Layout";
 import { Helper } from "components/Helper";
@@ -176,11 +177,19 @@ const Home = () => {
     };
   }, [command, mode, party]);
 
+  const LeftSide = styled.div`
+    width: 70%;
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+  `;
   return (
     <Layout>
+      <LeftSide>
+        <History commandHistory={history} />
+        <Input command={command} setCommand={setCommand} />
+      </LeftSide>
       <Helper mode={mode} data={stats} />
-      <History commandHistory={history} />
-      <Input command={command} setCommand={setCommand} />
     </Layout>
   );
 };

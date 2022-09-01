@@ -7,33 +7,24 @@ import {
   GreenCandle,
   RedCandle,
 } from "styles/colors";
-import {
-  OUTPUTS_RULES,
-  OUTPUTS_PAYOUTS,
-  OUTPUTS_COMMANDS,
-} from "utils/outputs";
+import { OUTPUTS_PAYOUTS, OUTPUTS_COMMANDS } from "utils/outputs";
 import { formatData } from "lib/formatData";
 
 const HelperSection = styled.section`
-  width: 100%;
-  height: 45%;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-`;
-const DoubleBox = styled.div`
+  width: 30%;
+  height: 70%;
   display: flex;
   flex-direction: column;
-  width: 30%;
-  height: 100%;
+  justify-content: space-between;
+  align-item: center;
 `;
+
 const HelperWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   color: ${(props) => props.color};
-  height: ${(props) => props.height}%;
-  width: ${(props) => props.width}%;
+  width: 100%;
 `;
 
 const HelperTitle = styled.h2`
@@ -51,7 +42,7 @@ const OutputTitle = styled.span`
 
 const HelperComponent = ({ title, height, width, outputs, color, type }) => {
   return (
-    <HelperWrapper color={color} height={height} width={width}>
+    <HelperWrapper color={color}>
       <HelperTitle>{title}</HelperTitle>
       <OutputWrapper>
         {outputs.map((item, key) => (
@@ -68,29 +59,20 @@ export const Helper = ({ mode, data }) => {
   return (
     <HelperSection>
       <HelperComponent
-        title="RULES"
-        height="100"
-        width="30"
-        color={GreenCandle}
-        outputs={OUTPUTS_RULES}
+        title="AVAILAIBLE COMMANDS"
+        height="50"
+        width="100"
+        color={purple}
+        outputs={OUTPUTS_COMMANDS[mode]}
       />
-      <DoubleBox>
-        <HelperComponent
-          title="AVAILAIBLE COMMANDS"
-          height="50"
-          width="100"
-          color={purple}
-          outputs={OUTPUTS_COMMANDS[mode]}
-        />
-        <HelperComponent
-          title="STATS"
-          height="50"
-          width="100"
-          color={orange}
-          type="datas"
-          outputs={formatData(data)}
-        />
-      </DoubleBox>
+      <HelperComponent
+        title="STATS"
+        height="50"
+        width="100"
+        color={orange}
+        type="datas"
+        outputs={formatData(data)}
+      />
       <HelperComponent
         title="PAYOUTS"
         width="30"

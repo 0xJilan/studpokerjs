@@ -30,7 +30,7 @@ const Section = styled.section`
   height: 80%;
   width: 100%;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
 `;
 
 export const Layout = ({ children }) => {
