@@ -1,4 +1,4 @@
-import { HandResolution, GameResolution, Deck } from "./utils";
+import { HandResolution, GameResolution } from "./utils";
 /**
  * Get the score of a given name depending of combinaition name and sum of values contained
  * @param {string} rank Combination name
@@ -13,7 +13,7 @@ export declare const getPoints: (rank: string, values: number[]) => number;
  * @returns {Resolution} Object that contain score, name of combination
  * @exemple resolveHand({suits:['C','D','D','H','S'], values:[2,2,8,11,11]}) => {score: 322, handRank: 'TWO_PAIRS'}
  */
-export declare const resolveHand: (hand: Deck) => HandResolution;
+export declare const resolveHand: (deck: string[]) => HandResolution;
 /**
  * Resolves game by comparing score and check if bank is qualified
  * @param {HandResolution} bankResolvedHand Object that contains the bank resolved hand

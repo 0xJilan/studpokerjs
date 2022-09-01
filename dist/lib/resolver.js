@@ -3,6 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.resolveGame = exports.resolveHand = exports.getPoints = void 0;
 const checker_1 = require("./checker");
 const utils_1 = require("./utils");
+const deck_1 = require("./deck");
 /**
  * Check if a given array only contains number
  * @param {any []} arrayToCheck Array of values
@@ -47,7 +48,8 @@ exports.getPoints = getPoints;
  * @returns {Resolution} Object that contain score, name of combination
  * @exemple resolveHand({suits:['C','D','D','H','S'], values:[2,2,8,11,11]}) => {score: 322, handRank: 'TWO_PAIRS'}
  */
-const resolveHand = (hand) => {
+const resolveHand = (deck) => {
+    const hand = (0, deck_1.splitBySuitsAndValues)(deck);
     const { suits, values } = hand;
     const sortedSuits = sortByType(suits);
     const sortedValues = sortByType(values);

@@ -15,7 +15,6 @@ const Home = () => {
   const { stats, dispatchStats } = useContext(UserStats);
   const { history, dispatchHistory } = useContext(UserHistory);
   const { party, dispatchParty } = useContext(UserParty);
-
   const [mode, setMode] = useState("MENU");
   const [command, setCommand] = useState("");
 
