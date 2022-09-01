@@ -16,7 +16,12 @@ export const History = ({ commandHistory }) => {
     <HistoryWrapper>
       {commandHistory.map((command, i) =>
         command.cards ? (
-          <CardsOutput cards={command.cards} resolved={command.resolved} />
+          <CardsOutput
+            cards={command.cards}
+            resolved={command.resolved}
+            type={command.type}
+            key={i}
+          />
         ) : (
           <Output host={command.host} command={command.message} key={i} />
         )

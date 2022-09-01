@@ -12,6 +12,11 @@ export const PartyReducer = (party, action) => {
         userHand: [],
         bankHand: [],
       };
+    case "BET":
+      return {
+        ...party,
+        bankHand: action.bankHand,
+      };
     default:
       return party;
   }

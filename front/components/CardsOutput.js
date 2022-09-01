@@ -27,8 +27,7 @@ const ResolverWrapper = styled.div`
   align-items: center;
 `;
 
-export const CardsOutput = ({ cards, resolved }) => {
-  const SUBJECT = resolved ? "YOUR HAND" : "BANK HAND";
+export const CardsOutput = ({ cards, resolved, type }) => {
   const SUBJECT_CARDS =
     cards.length > 1 ? cards : ["X", "X", "X", "X", cards[0]];
   return (
@@ -40,7 +39,7 @@ export const CardsOutput = ({ cards, resolved }) => {
       </CardsWrapper>
       <ResolverWrapper>
         <Text>
-          {SUBJECT}: {resolved?.handRank}
+          {type}: {resolved?.handRank}
         </Text>
       </ResolverWrapper>
     </CardOutputWrapper>

@@ -9,6 +9,7 @@ import {
   getRandomCardsShuffledFromDeck,
   getReadableCards,
   resolveHand,
+  resolveGame,
 } from "studpokerjs";
 
 const Home = () => {
@@ -72,12 +73,30 @@ const Home = () => {
               setCommand("");
               break;
             case "BET":
-              console.log("BET");
-              // Get 4 Cards for the bank
-              // resolve hand of the bank
-              //compare two hands
-              // display bank hand resolved
-              // display result
+              const cardsToExclude = party.userHand.concat(party.bankHand);
+              const newBankHand = getRandomCardsShuffledFromDeck(
+                4,
+                cardsToExclude
+              ).concat(party.bankHand);
+              const bankHandResolved = resolveHand(newBankHand);
+              const userHandResolved = resolveHand(party.userHand);
+              dispatchStats({ type: command });
+              dispatchParty({ type: command, bankHand: newBankHand });
+              const result = resolveGame(bankHandResolved, userHandResolved);
+
+              console.log(result);
+              //compare two hands here and dispatch history depending winner or losser
+
+              dispatchHistory({
+                type: command,
+                command,
+                bank: {
+                  hand: getReadableCards(newBankHand),
+                  resolved: bankHandResolved,
+                },
+              });
+              // DISPATCH NEW STAT WITH WALLET  Loose :- 200 OR WIn: ANte * Payout
+
               setCommand("");
               break;
             case "EXIT":

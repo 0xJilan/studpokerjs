@@ -25,12 +25,16 @@ export const HistoryReducer = (history, action) => {
         { host: true, message },
       ];
     case "DEAL":
-      const { command, user, bank } = action;
       return [
         ...history,
-        { host: false, message: command },
-        { host: true, cards: user.hand, resolved: user.resolved },
-        { host: true, cards: bank.hand },
+        { host: false, message: action.command },
+        {
+          host: true,
+          cards: action.user.hand,
+          resolved: action.user.resolved,
+          type: "user",
+        },
+        { host: true, cards: action.bank.hand, type: "bank" },
         {
           host: true,
           message,
@@ -41,6 +45,17 @@ export const HistoryReducer = (history, action) => {
         ...history,
         { host: false, message: action.command },
         { host: true, message },
+      ];
+    case "BET":
+      return [
+        ...history,
+        { host: false, message: action.command },
+        {
+          host: true,
+          cards: action.bank.hand,
+          resolved: action.bank.resolved,
+          type: "bank",
+        },
       ];
     case "NOT_FOUND":
       return [
