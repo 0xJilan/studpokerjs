@@ -31,13 +31,13 @@ export const HistoryReducer = (history, action) => {
       return [
         ...history,
         { host: false, message: command },
-        { host: true, message: "YOUR CARDS:" },
         { host: true, cards: user.hand, resolved: user.resolved },
-        { host: true, message: "BANK CARD:" },
-        { host: true, cards: ["BACK", "BACK", "BACK", "BACK", bank.hand[0]] },
-        { host: true, message: "THINK YOUR HAND WILL BEAT THE DEALER?" },
-        { host: true, message: "ENTER 'BET' TO CONTINUE. COST: 2 ANTES" },
-        { host: true, message: "OR 'FOLD' FOLD & LOSE YOUR ANTE.." },
+        { host: true, cards: bank.hand },
+        {
+          host: true,
+          message:
+            "IF YOU THINK YOUR HAND WILL WIN ?  ENTER 'BET' TO CONTINUE (COST: 2 ANTE) OR 'FOLD' AND LOSE YOUR ANTE",
+        },
       ];
 
     case "NOT_FOUND":

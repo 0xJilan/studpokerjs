@@ -27,18 +27,25 @@ const ResolverWrapper = styled.div`
 `;
 
 export const CardsOutput = ({ cards, resolved }) => {
+  const SUBJECT = resolved ? "YOUR HAND" : "BANK HAND";
+  console.log("cards:", cards);
+  const SUBJECT_CARDS =
+    cards.length > 1 ? cards : ["X", "X", "X", "X", cards[0]];
+
+  console.log("SUBJECTCARD:", SUBJECT_CARDS);
+
   return (
     <CardOutputWrapper>
       <CardsWrapper>
-        {cards.map((card, i) => {
+        {SUBJECT_CARDS.map((card, i) => {
           return <Card src={`cards/${card}.svg`} key={i} alt="poker-card" />;
         })}
       </CardsWrapper>
-      {resolved && (
-        <ResolverWrapper>
-          <Text>{resolved.handRank}</Text>
-        </ResolverWrapper>
-      )}
+      <ResolverWrapper>
+        <Text>
+          {SUBJECT}: {resolved?.handRank}
+        </Text>
+      </ResolverWrapper>
     </CardOutputWrapper>
   );
 };

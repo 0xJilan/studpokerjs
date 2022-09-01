@@ -58,7 +58,7 @@ const Home = () => {
                   resolved: resolveHand(userHand),
                 },
                 bank: {
-                  hand: getReadableCards(userHand),
+                  hand: getReadableCards(bankHand),
                 },
               });
               //TODO: explain Bet or fold like on play
