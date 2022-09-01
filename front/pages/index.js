@@ -5,7 +5,11 @@ import { Helper } from "components/Helper";
 import { History } from "components/History";
 import { Input } from "components/Input";
 import { isAvailableCommand } from "lib/Checker";
-import { getRandomCardsShuffledFromDeck, getReadableCards } from "studpokerjs";
+import {
+  getRandomCardsShuffledFromDeck,
+  getReadableCards,
+  resolveHand,
+} from "studpokerjs";
 
 const Home = () => {
   const { stats, dispatchStats } = useContext(UserStats);
@@ -50,8 +54,13 @@ const Home = () => {
               dispatchHistory({
                 type: command,
                 command,
-                userHand: getReadableCards(userHand),
-                bankHand: getReadableCards(bankHand),
+                user: {
+                  hand: getReadableCards(userHand),
+                  resolved: resolveHand(userHand),
+                },
+                bank: {
+                  hand: getReadableCards(userHand),
+                },
               });
               //TODO: explain Bet or fold like on play
               //TODO: dispatch stats and history

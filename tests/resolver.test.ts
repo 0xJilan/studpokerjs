@@ -1,6 +1,6 @@
 import { getPoints, resolveHand, resolveGame } from "../src/lib/resolver";
 import { HandResolution, GameResolution } from "../src/lib/utils";
-import { valuesOf, suitsOf, handOf } from "../src/lib/mocks";
+import { valuesOf, suitsOf, handOf, deckOf } from "../src/lib/mocks";
 
 describe("Calculates the value of the hand", () => {
   it("must add up all the values of the hand", () => {
@@ -25,42 +25,22 @@ describe("Calculates the value of the hand", () => {
 
 describe("Resolve hand with rank and points", () => {
   it("must return an object", () => {
-    expect(
-      typeof resolveHand({
-        suits: suitsOf.Nothing,
-        values: valuesOf.TwoPairs,
-      })
-    ).toBe("object");
+    expect(typeof resolveHand(deckOf.AceAndKing)).toBe("object");
   });
   it("must output this result for a given Hand of TWO PAIRS", () => {
-    expect(
-      resolveHand({
-        suits: suitsOf.Nothing,
-        values: valuesOf.TwoPairs,
-      })
-    ).toMatchObject<HandResolution>({
+    expect(resolveHand(deckOf.TwoPairs)).toMatchObject<HandResolution>({
       score: 316,
       handRank: "TWO_PAIRS",
     });
   });
   it("must output this result for a given Hand of STRAIGHT", () => {
-    expect(
-      resolveHand({
-        suits: suitsOf.Nothing,
-        values: valuesOf.RegularStraight,
-      })
-    ).toMatchObject<HandResolution>({
+    expect(resolveHand(deckOf.RegularStraight)).toMatchObject<HandResolution>({
       score: 530,
       handRank: "STRAIGHT",
     });
   });
-  it("must output this result for a given Hand of ROYAL FLUSh", () => {
-    expect(
-      resolveHand({
-        suits: suitsOf.Flush,
-        values: valuesOf.HighStraight,
-      })
-    ).toMatchObject<HandResolution>({
+  it("must output this result for a given Hand of ROYAL FLUSH", () => {
+    expect(resolveHand(deckOf.RoyalFlush)).toMatchObject<HandResolution>({
       score: 1060,
       handRank: "ROYAL_FLUSH",
     });

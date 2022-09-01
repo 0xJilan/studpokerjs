@@ -39,6 +39,12 @@ export const suitsOf = {
   Nothing: ["C", "C", "D", "H", "S"],
   Flush: ["C", "C", "C", "C", "C"],
 };
+export const deckOf = {
+  AceAndKing: ["5-C", "7-C", "10-D", "13-H", "14-S"],
+  TwoPairs: ["3-C", "3-C", "8-D", "8-H", "14-S"],
+  RegularStraight: ["4-C", "5-C", "6-D", "7-H", "8-S"],
+  RoyalFlush: ["10-C", "11-C", "12-C", "13-C", "14-C"],
+};
 
 export const handOf = {
   Nothing: { score: 0, handRank: "NOTHING" },

@@ -12,6 +12,7 @@ import {
   GameResolution,
   Deck,
 } from "./utils";
+import { splitBySuitsAndValues } from "./deck";
 
 /**
  * Check if a given array only contains number
@@ -61,7 +62,8 @@ export const getPoints = (rank: string, values: number[]): number => {
  * @returns {Resolution} Object that contain score, name of combination
  * @exemple resolveHand({suits:['C','D','D','H','S'], values:[2,2,8,11,11]}) => {score: 322, handRank: 'TWO_PAIRS'}
  */
-export const resolveHand = (hand: Deck): HandResolution => {
+export const resolveHand = (deck: string[]): HandResolution => {
+  const hand = splitBySuitsAndValues(deck);
   const { suits, values } = hand;
   const sortedSuits = sortByType(suits);
   const sortedValues = sortByType(values);
