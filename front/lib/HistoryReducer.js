@@ -28,13 +28,14 @@ export const HistoryReducer = (history, action) => {
       return [
         ...history,
         { host: false, message: action.command },
-        {
+
+        !action.error && {
           host: true,
           cards: action.user.hand,
           resolved: action.user.resolved,
           type: "user",
         },
-        { host: true, cards: action.bank.hand, type: "bank" },
+        !action.error && { host: true, cards: action.bank.hand, type: "bank" },
         {
           host: true,
           message,
@@ -52,21 +53,7 @@ export const HistoryReducer = (history, action) => {
       ];
     case "BET":
       const payout = action.payout;
-      const resolution = !action.isBankQualified
-        ? {
-            message: OUTPUTS_RESPONSES[action.command]?.unqualified,
-            payout: 400,
-          }
-        : action.isBankWinner
-        ? {
-            message: OUTPUTS_RESPONSES[action.command]?.loose,
-            payout: 0,
-          }
-        : {
-            message: OUTPUTS_RESPONSES[action.command]?.win,
-            payout: 100 + 200 * payout,
-          };
-
+      const resolveMessage = action.resolveMessage;
       return [
         ...history,
         { host: false, message: action.command },
@@ -84,11 +71,11 @@ export const HistoryReducer = (history, action) => {
         },
         {
           host: true,
-          message: resolution.message,
+          message: resolveMessage,
         },
         {
           host: true,
-          message: `Payout : ${resolution.payout}`,
+          message: `Payout : ${payout}`,
         },
         {
           host: true,

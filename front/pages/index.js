@@ -43,23 +43,32 @@ const Home = () => {
               setCommand("");
               break;
             case "DEAL":
-              setMode("DEAL");
-              const getSixCards = getRandomCardsShuffledFromDeck(6);
-              const userHand = getSixCards.slice(0, 5);
-              const bankHand = getSixCards.slice(5, 6);
-              dispatchStats({ type: command });
-              dispatchParty({ type: command, userHand, bankHand });
-              dispatchHistory({
-                type: command,
-                command,
-                user: {
-                  hand: getReadableCards(userHand),
-                  resolved: resolveHand(userHand),
-                },
-                bank: {
-                  hand: getReadableCards(bankHand),
-                },
-              });
+              if (stats.wallet >= 300) {
+                setMode("DEAL");
+                const getSixCards = getRandomCardsShuffledFromDeck(6);
+                const userHand = getSixCards.slice(0, 5);
+                const bankHand = getSixCards.slice(5, 6);
+                dispatchStats({ type: command });
+                dispatchParty({ type: command, userHand, bankHand });
+                dispatchHistory({
+                  type: command,
+                  command,
+                  user: {
+                    hand: getReadableCards(userHand),
+                    resolved: resolveHand(userHand),
+                  },
+                  bank: {
+                    hand: getReadableCards(bankHand),
+                  },
+                });
+              } else {
+                dispatchHistory({
+                  type: command,
+                  command,
+                  error: stats.wallet < 300,
+                });
+                setMode("MENU");
+              }
               setCommand("");
               break;
             case "FOLD":
@@ -80,11 +89,27 @@ const Home = () => {
               ).concat(party.bankHand);
               const bankHandResolved = resolveHand(newBankHand);
               const userHandResolved = resolveHand(party.userHand);
-              dispatchStats({ type: command });
               dispatchParty({ type: command, bankHand: newBankHand });
               const result = resolveGame(bankHandResolved, userHandResolved);
               const isBankWinner = result.winner === "Bank";
               const isBankQualified = result.isBankQualified;
+              const BET = 200;
+              const ANTE = 100;
+              const NEW_WALLET = stats.wallet - BET;
+              const PAYOUT_IF_UNQUALIFIED = NEW_WALLET + ANTE * 2 + BET;
+              const PAYOUT_IF_WINNER =
+                NEW_WALLET + ANTE + BET + BET * result.payout;
+              const PAYOUT = !isBankQualified
+                ? PAYOUT_IF_UNQUALIFIED
+                : isBankWinner
+                ? NEW_WALLET
+                : PAYOUT_IF_WINNER;
+              const resolveMessage = !isBankQualified
+                ? "YOU WIN - BANK IS NOT QUALIFIED"
+                : isBankWinner
+                ? "YOU LOOSE"
+                : "YOU WIN";
+
               dispatchHistory({
                 type: command,
                 command,
@@ -96,9 +121,13 @@ const Home = () => {
                   hand: getReadableCards(newBankHand),
                   resolved: bankHandResolved,
                 },
-                isBankWinner,
-                isBankQualified,
-                payout: result.payout,
+                resolveMessage,
+                payout: PAYOUT - NEW_WALLET,
+              });
+              dispatchStats({
+                type: command,
+                newWallet: PAYOUT,
+                winner: result.winner,
               });
               // DISPATCH NEW STAT WITH WALLET  Loose :- 200 OR WIn: ANte * Payout
               setMode("PLAY");
