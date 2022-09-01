@@ -82,6 +82,22 @@ export const HistoryReducer = (history, action) => {
           message: "ENTER 'DEAL' TO RECEIVE CARDS - COST: 100$",
         },
       ];
+
+    case "DEMO":
+      return [
+        ...history,
+        { host: false, message: action.command },
+        { host: true, message: "RUN SIMULATION OF 1000 HANDS" },
+        { host: true, message: `START WITH ${action.start} $` },
+        { host: true, message: `HANDS PLAYED : ${action.hands}` },
+        { host: true, message: `HAND WINS : ${action.wins}` },
+        { host: true, message: `HAND LOST : ${action.looses}` },
+        {
+          host: true,
+          message: `FINISH WITH: ${action.wallet} $`,
+        },
+      ];
+
     case "NOT_FOUND":
       return [
         ...history,

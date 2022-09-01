@@ -5,6 +5,7 @@ import { Helper } from "components/Helper";
 import { History } from "components/History";
 import { Input } from "components/Input";
 import { isAvailableCommand } from "lib/Checker";
+import { Simulation } from "lib/Simulation";
 import {
   getRandomCardsShuffledFromDeck,
   getReadableCards,
@@ -129,7 +130,6 @@ const Home = () => {
                 newWallet: PAYOUT,
                 winner: result.winner,
               });
-              // DISPATCH NEW STAT WITH WALLET  Loose :- 200 OR WIn: ANte * Payout
               setMode("PLAY");
               setCommand("");
               break;
@@ -139,10 +139,21 @@ const Home = () => {
               break;
             case "DEMO":
               console.log("DEMO");
+              console.log("Simulation:", Simulation());
+              const { hands, looses, wallet, wins } = Simulation();
+              dispatchHistory({
+                type: command,
+                start: 10000,
+                hands,
+                looses,
+                wallet,
+                wins,
+              });
+
               setCommand("");
               break;
             case "CLEAR":
-              dispatchHistory({ type: "CLEAR" });
+              dispatchHistory({ type: command });
               setCommand("");
               break;
             default:
