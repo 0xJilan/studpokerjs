@@ -5,6 +5,12 @@ export const StatsReducer = (stats, action) => {
         ...stats,
         wallet: stats.wallet + 1000,
       };
+    case "DEAL":
+      return {
+        ...stats,
+        wallet: stats.wallet - 100,
+        hands: stats.hands + 1,
+      };
 
     default:
       return stats;

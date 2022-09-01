@@ -43,11 +43,10 @@ const Home = () => {
               const getSixCards = getRandomCardsShuffledFromDeck(6);
               const userHand = getSixCards.slice(0, 5);
               const bankHand = getSixCards.slice(5, 6);
-
+              dispatchStats({ type: "DEAL" });
               dispatchParty({ type: command, userHand, bankHand });
               console.log("userHand:", userHand);
               console.log("bankHand:", bankHand);
-              //TODO: ADD LOOK TO CARDS
               dispatchHistory({
                 type: command,
                 command,
