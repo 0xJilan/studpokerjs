@@ -83,20 +83,25 @@ const Home = () => {
               dispatchStats({ type: command });
               dispatchParty({ type: command, bankHand: newBankHand });
               const result = resolveGame(bankHandResolved, userHandResolved);
-
-              console.log(result);
-              //compare two hands here and dispatch history depending winner or losser
-
+              const isBankWinner = result.winner === "Bank";
+              const isBankQualified = result.isBankQualified;
               dispatchHistory({
                 type: command,
                 command,
+                user: {
+                  hand: getReadableCards(party.userHand),
+                  resolved: userHandResolved,
+                },
                 bank: {
                   hand: getReadableCards(newBankHand),
                   resolved: bankHandResolved,
                 },
+                isBankWinner,
+                isBankQualified,
+                payout: result.payout,
               });
               // DISPATCH NEW STAT WITH WALLET  Loose :- 200 OR WIn: ANte * Payout
-
+              setMode("PLAY");
               setCommand("");
               break;
             case "EXIT":
