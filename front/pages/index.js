@@ -2,7 +2,6 @@ import { useState, useContext, useEffect, useCallback } from "react";
 import styled from "styled-components";
 import CommandsList from "components/CommandsList";
 import PlayersHands from "components/PlayersHands";
-
 import { UserStats, UserHistory, UserParty } from "pages/_app";
 import { Layout } from "components/Layout";
 import { Helper } from "components/Helper";
@@ -10,6 +9,7 @@ import { History } from "components/History";
 import { Input } from "components/Input";
 import { isAvailableCommand } from "lib/Checker";
 import { Simulation } from "lib/Simulation";
+import { getDeal } from "lib/GameHandler";
 import {
   getRandomCardsShuffledFromDeck,
   getReadableCards,
@@ -50,21 +50,11 @@ const Home = () => {
             case "DEAL":
               if (stats.wallet >= 300) {
                 setMode("DEAL");
-                const getSixCards = getRandomCardsShuffledFromDeck(6);
-                const userHand = getSixCards.slice(0, 5);
-                const bankHand = getSixCards.slice(5, 6);
                 dispatchStats({ type: command });
-                dispatchParty({ type: command, userHand, bankHand });
+                dispatchParty({ type: command, DEAL: getDeal() });
                 dispatchHistory({
                   type: command,
                   command,
-                  user: {
-                    hand: getReadableCards(userHand),
-                    resolved: resolveHand(userHand),
-                  },
-                  bank: {
-                    hand: getReadableCards(bankHand),
-                  },
                 });
               } else {
                 dispatchHistory({
@@ -199,7 +189,7 @@ const Home = () => {
         <Input command={command} setCommand={setCommand} />
       </LeftSide>
       <RightSide>
-        <PlayersHands />
+        <PlayersHands party={party} />
         <Helper mode={mode} data={stats} />
       </RightSide>
     </Layout>

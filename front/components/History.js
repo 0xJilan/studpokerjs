@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { CardsOutput } from "components/CardsOutput";
 import { Output } from "components/Output";
 
 const HistoryWrapper = styled.div`
@@ -14,18 +13,9 @@ const HistoryWrapper = styled.div`
 export const History = ({ commandHistory }) => {
   return (
     <HistoryWrapper>
-      {commandHistory.map((command, i) =>
-        command.cards ? (
-          <CardsOutput
-            cards={command.cards}
-            resolved={command.resolved}
-            type={command.type}
-            key={i}
-          />
-        ) : (
-          <Output host={command.host} command={command.message} key={i} />
-        )
-      )}
+      {commandHistory.map((command, i) => (
+        <Output host={command.host} command={command.message} key={i} />
+      ))}
     </HistoryWrapper>
   );
 };

@@ -16,7 +16,16 @@ const Stats = {
   ante: 100,
 };
 const History = [{ host: true, message: "Welcome Fren!" }];
-const Party = { userHand: [], bankHand: [], status: "" };
+
+const Party = {
+  userHand: [],
+  userHandDisplay: [],
+  userResolution: "",
+  bankHand: [],
+  bankHandDisplay: [],
+  bankResolution: "",
+  status: "WAITING FOR PLAY...",
+};
 
 const MyApp = ({ Component, pageProps }) => {
   const [stats, dispatchStats] = useReducer(StatsReducer, Stats);

@@ -28,14 +28,6 @@ export const HistoryReducer = (history, action) => {
       return [
         ...history,
         { host: false, message: action.command },
-
-        !action.error && {
-          host: true,
-          cards: action.user.hand,
-          resolved: action.user.resolved,
-          type: "user",
-        },
-        !action.error && { host: true, cards: action.bank.hand, type: "bank" },
         {
           host: true,
           message,
