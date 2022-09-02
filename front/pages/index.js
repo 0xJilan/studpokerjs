@@ -1,6 +1,8 @@
 import { useState, useContext, useEffect, useCallback } from "react";
 import styled from "styled-components";
 import CommandsList from "components/CommandsList";
+import PlayersHands from "components/PlayersHands";
+
 import { UserStats, UserHistory, UserParty } from "pages/_app";
 import { Layout } from "components/Layout";
 import { Helper } from "components/Helper";
@@ -177,12 +179,18 @@ const Home = () => {
     };
   }, [command, mode, party]);
 
-  const LeftSide = styled.div`
-    width: 70%;
+  const SideContainer = styled.div`
     display: flex;
     height: 100%;
     flex-direction: column;
   `;
+  const LeftSide = styled(SideContainer)`
+    width: 60%;
+  `;
+  const RightSide = styled(SideContainer)`
+    width: 40%;
+  `;
+
   return (
     <Layout>
       <LeftSide>
@@ -190,7 +198,10 @@ const Home = () => {
         <History commandHistory={history} />
         <Input command={command} setCommand={setCommand} />
       </LeftSide>
-      <Helper mode={mode} data={stats} />
+      <RightSide>
+        <PlayersHands />
+        <Helper mode={mode} data={stats} />
+      </RightSide>
     </Layout>
   );
 };

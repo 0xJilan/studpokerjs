@@ -6,8 +6,9 @@ import { OUTPUTS_COMMANDS } from "utils/outputs";
 const CommandsListWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
   width: 50%;
+  height: 5vh;
 `;
 const CommandsContainer = styled.div`
 display: flex;
