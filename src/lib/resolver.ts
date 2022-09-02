@@ -10,7 +10,6 @@ import {
   HandPayouts,
   HandResolution,
   GameResolution,
-  Deck,
 } from "./utils";
 import { splitBySuitsAndValues } from "./deck";
 

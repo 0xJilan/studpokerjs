@@ -1,5 +1,6 @@
 import { useState, useContext, useEffect, useCallback } from "react";
 import styled from "styled-components";
+import CommandsList from "components/CommandsList";
 import { UserStats, UserHistory, UserParty } from "pages/_app";
 import { Layout } from "components/Layout";
 import { Helper } from "components/Helper";
@@ -150,7 +151,6 @@ const Home = () => {
                 wallet,
                 wins,
               });
-
               setCommand("");
               break;
             case "CLEAR":
@@ -186,6 +186,7 @@ const Home = () => {
   return (
     <Layout>
       <LeftSide>
+        <CommandsList mode={mode} />
         <History commandHistory={history} />
         <Input command={command} setCommand={setCommand} />
       </LeftSide>

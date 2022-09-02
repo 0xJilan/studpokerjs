@@ -3,12 +3,11 @@ import { Blink } from "components/Animations";
 import { orange, GreenCandle, RedCandle, white } from "styles/colors";
 
 export const Text = styled.span`
-  font-size: 0.8rem;
-  color: ${white};
-  @media (min-width: 1180) {
-    font-size: 1rem;
-  }
+  font-size: ${(props) => props.size || 0.8}rem;
+  color: ${(props) => props.color || white};
+  margin-bottom: 0.2rem;
 `;
+
 export const Fren = styled(Text)`
   color: ${GreenCandle};
 `;

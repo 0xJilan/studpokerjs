@@ -11,7 +11,7 @@ import { OUTPUTS_PAYOUTS, OUTPUTS_COMMANDS } from "utils/outputs";
 import { formatData } from "lib/formatData";
 
 const HelperSection = styled.section`
-  width: 30%;
+  width: 50%;
   height: 70%;
   display: flex;
   flex-direction: column;
@@ -40,7 +40,7 @@ const OutputTitle = styled.span`
   margin-bottom: 0.2rem;
 `;
 
-const HelperComponent = ({ title, height, width, outputs, color, type }) => {
+const HelperComponent = ({ title, outputs, color, type }) => {
   return (
     <HelperWrapper color={color}>
       <HelperTitle>{title}</HelperTitle>
@@ -55,16 +55,9 @@ const HelperComponent = ({ title, height, width, outputs, color, type }) => {
   );
 };
 
-export const Helper = ({ mode, data }) => {
+export const Helper = ({ data }) => {
   return (
     <HelperSection>
-      <HelperComponent
-        title="AVAILAIBLE COMMANDS"
-        height="50"
-        width="100"
-        color={purple}
-        outputs={OUTPUTS_COMMANDS[mode]}
-      />
       <HelperComponent
         title="STATS"
         height="50"

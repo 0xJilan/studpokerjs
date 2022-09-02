@@ -5,7 +5,7 @@ import {
 } from "studpokerjs";
 
 export const Simulation = () => {
-  let REPETITION = 1000;
+  let REPETITION = 20;
   let INITIATOR = 0;
   let userStats = {
     hands: 0,
@@ -15,7 +15,7 @@ export const Simulation = () => {
     ante: 100,
   };
 
-  while (INITIATOR < REPETITION) {
+  while (INITIATOR < REPETITION || userStats.wallet < 300) {
     INITIATOR++;
     const getTenCards = getRandomCardsShuffledFromDeck(10);
     const userHand = getTenCards.slice(0, 5);
@@ -29,11 +29,13 @@ export const Simulation = () => {
     const ANTE = 100;
     const NEW_WALLET = userStats.wallet - BET;
     const PAYOUT_IF_UNQUALIFIED = NEW_WALLET + ANTE * 2 + BET;
+    const PAYOUT_IF_LOOSE = NEW_WALLET;
     const PAYOUT_IF_WINNER = NEW_WALLET + ANTE + BET + BET * result.payout;
+
     const PAYOUT = !isBankQualified
       ? PAYOUT_IF_UNQUALIFIED
       : isBankWinner
-      ? NEW_WALLET
+      ? PAYOUT_IF_LOOSE
       : PAYOUT_IF_WINNER;
 
     userStats = {
